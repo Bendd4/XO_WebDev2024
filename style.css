@@ -1,4 +1,66 @@
-html {
+html{
   height: 100%;
-  width: 100%;
+  padding: 0%;
+  margin: 0%;
+  overflow-y: hidden;
+}
+
+body{
+  background-color: rgb(45, 45, 45);
+  padding: 0%;
+  margin: 0%;
+  height: 100%;
+}
+
+#mainMenu{
+  margin: 4%;
+  padding: 20px;
+  height: 80%;
+  display:grid;
+  grid-template-columns: 65% 35%;
+}
+
+#menuPanel{
+  margin: 20px;
+  display: grid;
+  grid-template-rows: repeat(5,1fr);
+}
+
+#userPanel{
+  margin: 30px;
+  border: 2px solid white;
+  display: grid;
+  grid-template-rows: 40% 60%;
+}
+
+.mainMenuButton{
+  color: white;
+  border: 2px solid white;
+  padding: 30px 0px 0px 0px;
+  margin: 10px;
+  text-align: center;
+  font-size: 30px;
+}
+
+#welcomeText{
+  color: white;
+  padding: 40px 0px 0px 20px;
+  font-size: 40px;
+}
+
+#playMatchButton{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#userApparance{
+  margin: 5% 0% 0% 60%;
+}
+#userProfile{
+  width: 80%;
+  border-radius: 50%;
+}
+#userUsername{
+  margin: 5% 0% 0% 0%;
+  color: white;
 }
