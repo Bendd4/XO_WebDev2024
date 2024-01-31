@@ -1,43 +1,30 @@
+<!-- rename to index when done -->
+
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>TicTacPoint</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicTacToe</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
-  <div id="mainMenu">
-    <div id="menuPanel">
-        <div id="welcomeText">Welcome back, {username}!</div>
-        <div id="findMatchButton" class="mainMenuButton">
-          Find match
+    <div style="margin-top: 5em;" class="loginDiv">
+        <div>
+            <img src="pfp_placeholder.png" id="loginLogo" >
         </div>
-        <div id="playMatchButton">
-          <div id="joinButton" class="mainMenuButton">Join</div>
-          <div id="createButton" class="mainMenuButton">Create</div>
-        </div>
-        <div id="howToPlayButton" class="mainMenuButton">
-          How To Play
-        </div>
-        <div id="LogoutButton" class="mainMenuButton">
-          Logout
+        <div id="loginForms">
+            <div id="usernameForm" class="loginForm">
+                <label for="username">Username</label>
+                <input type="text" class="loginInput">
+            </div>
+            <div id="passwordForm" class="loginForm">
+                <label for="password">Password</label>
+                <input type="text" class="loginInput">
+            </div>
+            <a href="dashboard.html"><button type="button">Log In</button></a>
+            <button type="button">Register</button>
         </div>
     </div>
-    <div id="userPanel">
-      <div id="userApparance">
-        <img id="userProfile" src="pfp_placeholder.png" alt="pfp placholda" srcset=""></img>
-        <div id="userUsername">{USERNAME}</div>
-      </div>
-      <div id="userStat">
-        hi
-      </div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
 </body>
-  
 </html>
