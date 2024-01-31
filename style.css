@@ -1,27 +1,8 @@
-/* for dashboard */
-.dashboardButton{
-  background-color: rgb(38, 38, 38) !important;
-  border: 2px solid white !important;
-  border-radius: 10px;
-}
-
-.dashboardButton:hover{
-  background-color: rgb(255, 255, 255) !important;
-  border: 2px solid rgb(38, 38, 38) !important;
-  color: black !important;
-}
-
 html{
   height: 100%;
   padding: 0%;
   margin: 0%;
   overflow-y: hidden;
-}
-
-a{
-  margin: 0%;
-  padding: 0%;
-  text-decoration: none;
 }
 
 body{
@@ -31,74 +12,47 @@ body{
   height: 100%;
 }
 
-#mainMenu{
-  margin: 4%;
-  padding: 20px;
-  height: 80%;
-  display:grid;
-  grid-template-columns: 65% 35%;
+a{
+  text-decoration: none !important;
+  color: white !important;
+}
+a:hover{
+  color: black !important;
 }
 
-#menuPanel{
-  margin: 20px;
-  display: grid;
-  grid-template-rows: repeat(5,1fr);
+/* for dashboard */
+.dashboardButton{
+  background-color: rgb(30, 30, 30) !important;
+  border: 2px solid white !important;
+  border-radius: 10px;
 }
 
-#userPanel{
-  margin: 30px;
-  border: 2px solid white;
-  display: grid;
-  grid-template-rows: 40% 60%;
+.dashboardButton:hover{
+  background-color: rgb(255, 255, 255) !important;
+  border: 2px solid rgb(30, 30, 30) !important;
+  color: black !important;
 }
 
-.mainMenuButton{
-  background-color: rgb(142, 142, 142);
-  color: white;
-  border: 2px solid white;
-  padding: 30px 0px 20px 0px;
-  margin: 10px;
-  text-align: center;
-  font-size: 30px;
+.profileCard{
+  border: 2px solid white !important;
+  border-radius: 10px;
 }
 
-.mainMenuButton:hover{
-  background-color: rgb(95, 95, 95);
-  color: rgb(179, 179, 179);
-}
-
-#welcomeText{
-  color: white;
-  padding: 40px 0px 0px 20px;
-  font-size: 40px;
-}
-
-#playMatchButton{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-#userApparance{
-  margin: 5% 0% 0% 60%;
-}
-#userProfile{
-  width: 80%;
+.profilePicture{
+  width: 30%;
+  border:2px solid white;
   border-radius: 50%;
-}
-#userUsername{
-  margin: 5% 0% 0% 0%;
-  color: white;
 }
 
 /* test */
 .loginButton{
-  background-color: rgb(38, 38, 38) !important;
+  background-color: rgb(30, 30, 30) !important;
   border: 2px solid white !important;
   width: 100% !important;
 }
 
 .loginButton:hover{
   background-color: rgb(255, 255, 255) !important;
-  border: 2px solid rgb(38, 38, 38) !important;
+  border: 2px solid rgb(30, 30, 30) !important;
   color: black !important;
 }
