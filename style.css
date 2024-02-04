@@ -2,7 +2,7 @@ html{
   height: 100%;
   padding: 0%;
   margin: 0%;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 body{
@@ -21,6 +21,15 @@ a:hover{
 }
 
 /* for dashboard */
+#playerDetailExpanded{
+  position: absolute !important;
+  height: 450px;
+  top:-450px;
+  transition: 0.5s;
+}
+#dashboardSmall{
+  display: none;
+}
 .dashboardButton{
   background-color: rgb(30, 30, 30) !important;
   border: 2px solid white !important;
@@ -43,6 +52,16 @@ a:hover{
   border:2px solid white;
   border-radius: 50%;
 }
+
+@media only screen and (max-width: 576px) {
+  #dashboardLarge{
+    display: none;
+  }
+  #dashboardSmall{
+    display: inherit;
+  }
+} 
+
 
 /* gameboard */
 #playerInfoCardsSmall{
@@ -84,7 +103,7 @@ a:hover{
     display: none;
   }
   #playerInfoCardsSmall{
-    display: initial;
+    display: inherit;
   }
   #playingBoard{
     width: 100%;
@@ -118,7 +137,7 @@ a:hover{
     display: none;
   }
   #playerInfoCardsMedium{
-    display: initial;
+    display: inherit;
   }
   #playerInfoCardsSmall{
     display: none;
@@ -130,8 +149,8 @@ a:hover{
     padding: 0%;
   }
   .table-block{
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     color: rgb(255, 255, 255);
     font-size: 60px;
     line-height: 50px;
