@@ -45,6 +45,14 @@ a:hover{
 }
 
 /* gameboard */
+#playerInfoCardsSmall{
+  display: none;
+}
+
+#playerInfoCardsMedium{
+  display: none;
+}
+
 .table-block{
   width: 125px;
   height: 125px;
@@ -60,6 +68,83 @@ a:hover{
   color: white;
   font-size: 15px;
   text-align: center;
+}
+.table-block:hover{
+  background-color: rgb(30, 30, 30);
+}
+
+@media only screen and (max-width: 576px) {
+  /*html{
+    background-color: blue;
+  }*/
+  #playerInfoCardsLarge{
+    display: none;
+  }
+  #playerInfoCardsMedium{
+    display: none;
+  }
+  #playerInfoCardsSmall{
+    display: initial;
+  }
+  #playingBoard{
+    width: 100%;
+  }
+  table{
+    padding: 0%;
+  }
+  .table-block{
+    width: 80px;
+    height: 80px;
+    color: rgb(255, 255, 255);
+    font-size: 60px;
+    line-height: 50px;
+    border: solid 2px white;
+    text-align: center;
+  }
+  .table-H{
+    width: 40px;
+    height: 30px;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+  }
+} 
+
+@media only screen and (min-width:576px) and (max-width: 992px) {
+  /*html{
+    background-color: blue;
+  }*/
+  #playerInfoCardsLarge{
+    display: none;
+  }
+  #playerInfoCardsMedium{
+    display: initial;
+  }
+  #playerInfoCardsSmall{
+    display: none;
+  }
+  #playingBoard{
+    width: 100%;
+  }
+  table{
+    padding: 0%;
+  }
+  .table-block{
+    width: 80px;
+    height: 80px;
+    color: rgb(255, 255, 255);
+    font-size: 60px;
+    line-height: 50px;
+    border: solid 2px white;
+    text-align: center;
+  }
+  .table-H{
+    width: 40px;
+    height: 30px;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+  }
 }
 
 /* test */

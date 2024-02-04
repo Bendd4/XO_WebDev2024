@@ -12,8 +12,25 @@
 
 <body class="bg-dark text-white">
     <div class="container mt-3 h1" onclick="return leaveTheMatchEarly()"><a href="dashboard.html">&lt;&lt;&lt;</a></div>
-    <div class="container row m-auto mt-5 h-100">
-        <div class="col-7 h-75 ps-5" style="border-radius: 10px;">
+    <div class="container row m-auto mt-5 h-100" >
+        
+        <div class="row container h-25 mb-4" id="playerInfoCardsSmall">
+            <div class="row h-50 mb-3 ms-4" style="border: 2px solid white;">
+                <div class="col text-start pt-4 display-6" style="font-size: 5vw;">${USERNAME}</div>
+                <div class="col text-end pe-3 pt-4 display-6" style="font-size: 7vw;">00 / 14</div>
+            </div>
+            <div class="row h-50 mb-3 ms-4" style="border: 2px solid white;">
+                <div class="col text-start pt-4 display-6" style="font-size: 5vw;">${USERNAME}</div>
+                <div class="col text-end pe-3 pt-4 display-6" style="font-size: 7vw;">00 / 14</div>
+            </div>
+        </div>
+
+        <div class="row container h-25 mb-4" id="playerInfoCardsMedium">
+
+        </div>
+
+        <!-- playing board -->
+        <div class="col-7 h-75 ps-0" style="border-radius: 10px;" id="playingBoard">
             <table class="ms-5">
                 <tr>
                     <td class="table-H"> </td>
@@ -52,12 +69,13 @@
                 </tr>
               </table>
         </div>
-
-        <div class="container col-5 h-75">
+        <!-- playing board -->
+        
+        <div class="container col-5 h-75" id="playerInfoCardsLarge">
             <div class="mx-3 mt-auto pb-4" style="border: 2px solid white; height: 45%;">
                 <div class="row display-6 h-75">
                     <div class="col-8 text-start pt-5 ps-5">
-                        USERNAME
+                        ${USERNAME}
                     </div>
                     <div class="col-4 text-end pt-4 pe-5">
                         <img class="img-fluid" src="placeholder.png" style="border-radius: 50%; border: 2px solid white;">
@@ -70,7 +88,7 @@
             <div class="mx-3 mt-5 pb-4" style="border: 2px solid white; height: 45%;">
                 <div class="row display-6 h-75">
                     <div class="col-8 text-start pt-5 ps-5">
-                        USERNAME
+                        ${USERNAME}
                     </div>
                     <div class="col-4 text-end pt-4 pe-5">
                         <img class="img-fluid" src="placeholder.png" style="border-radius: 50%; border: 2px solid white;">
