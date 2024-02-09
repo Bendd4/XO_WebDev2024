@@ -1,4 +1,4 @@
-var turn = 'O'
+var turn = 'X'
 var win = false;
 var winner = '';
 var score_X = 0;
@@ -47,7 +47,7 @@ function checkResult() {
             if (loc[0] == index) {
                 if (loc.length >= 3) {
                     if (loc[2] == turn) {
-                        console.log("yes")
+                        // console.log("yes")
                         hwin++;
                         temp.add(loc);
                     }
@@ -59,10 +59,9 @@ function checkResult() {
                 }
             }
             if (hwin >= 3) {
-                // win = true
-                console.log("Adding..");
+                // console.log("Adding..");
                 sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
-                console.log(sameShapeLoc);
+                // console.log(sameShapeLoc);
             }
         }
         temp.clear();
@@ -71,7 +70,7 @@ function checkResult() {
     // vertical
     for (let index = 0; index <= 3; index++) {
         let vwin = 0
-        for (var loc of shapeLoc) {
+        for (let loc of shapeLoc) {
             // console.log("------------");
             if (loc[1] == index) {
                 if (loc.length >= 3) {
@@ -87,16 +86,20 @@ function checkResult() {
                 }
             }
             if (vwin >= 3) {
-                win = true
-                console.log("Adding..");
+                // console.log("Adding..");
                 sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
-                console.log(sameShapeLoc);score_O
+                // console.log(sameShapeLoc);
             }
         }
         temp.clear();
     }
 
-    // Diagonal
+    // Diagonal (please God help me)
+    if (document.getElementById("A0").innerText == turn){
+        let temp = new Set();
+    }
+
+
     // if ((   document.getElementById("A0").innerText == turn &&
     //         document.getElementById("B1").innerText == turn &&
     //         document.getElementById("C2").innerText == turn) 
@@ -111,10 +114,25 @@ function checkResult() {
 
     if (turn == "X") {
         score_X += sameShapeLoc.size;
+        for (let scoreXTextObj of document.querySelectorAll("#scoreX")){
+            // console.log(scoreXTextObj)
+            scoreXTextObj.innerText = score_X+" / 14"
+        }
+        for (let loc of sameShapeLoc){
+            removeGameToken(loc);
+        }
     }
     else{
         score_O += sameShapeLoc.size;
+        for (let scoreOTextObj of document.querySelectorAll("#scoreO")){
+            scoreOTextObj.innerText = score_O+" / 14"
+        }
+        for (let loc of sameShapeLoc){
+            removeGameToken(loc);
+        }
     }
+    console.log("Score X : " + score_X);
+    console.log("Score O : " + score_O);
 
     let draw = 0;
     for (var block of blocks) {
@@ -123,16 +141,15 @@ function checkResult() {
         }
     }
 
-
-    console.log(win)
+    // console.log(win)
 
     if (win) {
         //Game end and someone wins the game
         // winner = turn;
         // turnObject.innerHTML = "Game win by " + winner;
-        if (turn = 'O') {
-            score_O += 1;
-            score_OShow.innerText = score_O + ''
+        if (turn = 'O' ) {
+            // score_O += 1;
+            // score_OShow.innerText = score_O + ''
         }
 
 
@@ -148,13 +165,38 @@ function checkResult() {
     console.log("------------------Finished Checking------------------")
 }
 function newGame() {
-    turn = 'O';
+    turn = 'X';
     // turnObject.innerHTML = "Turn: " + turn;
     winner = '';
+    score_O = 0
+    score_X = 0
     win = false;
     // 3. Modify the code here to reset the game to initial state
     for (var block of blocks) {
         block.innerText = ""
     }
     console.log("------------------Reset------------------")
+}
+
+function removeGameToken(location) {
+    let positionID = ''
+    // console.log(location)
+    switch (location[0]) {
+        case "0":
+            positionID = 'A' + location[1];
+            break;
+        case "1":
+            positionID = 'B' + location[1];
+            break;
+        case "2":
+            positionID = 'C' + location[1];
+            break;
+        case "3":
+            positionID = 'D' + location[1];
+            break;
+        default:
+            break;
+    }
+    // console.log(positionID);
+    document.getElementById(positionID).innerText = '';
 }
