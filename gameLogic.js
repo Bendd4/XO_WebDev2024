@@ -32,22 +32,19 @@ function checkResult() {
     let sameShapeLoc = new Set();
     let temp = new Set();
     for (var block of blocks) {
-        // console.log(block.innerText)
         let blockInfo = block.getAttribute("id").replace("A", 0).replace("B", 1).replace("C", 2).replace("D", 3).concat(block.innerText).split("")
         shapeLoc.add(blockInfo);
     }
     // console.log("------------------------------------")
 
-    // console.log(shapeLoc)
     // horizontal
     for (let index = 0; index <= 3; index++) {
         let hwin = 0
-        for (var loc of shapeLoc) {
+        for (let loc of shapeLoc) {
             // console.log("------------");
             if (loc[0] == index) {
                 if (loc.length >= 3) {
                     if (loc[2] == turn) {
-                        // console.log("yes")
                         hwin++;
                         temp.add(loc);
                     }
@@ -86,18 +83,37 @@ function checkResult() {
                 }
             }
             if (vwin >= 3) {
-                // console.log("Adding..");
                 sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
-                // console.log(sameShapeLoc);
             }
         }
         temp.clear();
     }
 
     // Diagonal (please God help me)
-    if (document.getElementById("A0").innerText == turn){
-        let temp = new Set();
+    let dwin = 0
+    // console.log(shapeLoc);
+    for (let loc of shapeLoc) {
+        let checkset = new Array(( parseInt(loc[0]) +1).toString(), ( parseInt(loc[0]) +1).toString(), (turn))
+        console.log(checkset)
+        shapeLoc = new Set([...shapeLoc, checkset])
+        if (shapeLoc.has(checkset)) {
+            dwin++;
+            console.log("the condition works")
+            temp.add(loc);
+        }
+        // console.log(loc)
+        console.log(shapeLoc);
+        // console.log( [( parseInt(loc[0]) +1).toString(), ( parseInt(loc[0]) +1).toString(), (turn)] );
+
     }
+    console.log(shapeLoc);
+    temp.clear();
+
+    // if (document.getElementById("A0").innerText == turn){
+    //     let temp = new Set();
+
+
+    // }
 
 
     // if ((   document.getElementById("A0").innerText == turn &&
@@ -135,7 +151,7 @@ function checkResult() {
     console.log("Score O : " + score_O);
 
     let draw = 0;
-    for (var block of blocks) {
+    for (let block of blocks) {
         if (block.innerText != '') {
             draw++;
         }
