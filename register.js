@@ -10,6 +10,8 @@ function createUser(event) {
         firebase.auth().createUserWithEmailAndPassword(username, password)
             .then(() => {
                 console.log("User created");
+                window.location.href = "index.html";
+
             })
             .catch((error) => {
                 console.log(error);
