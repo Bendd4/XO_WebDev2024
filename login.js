@@ -12,6 +12,7 @@ function loginUser(event) {
             window.location.href = "dashboard.html";
         })
         .catch((error) => {
+            alert(error.message);
             console.log(error);
         })
 }
