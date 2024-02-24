@@ -15,7 +15,11 @@ btnLogoutSmall.addEventListener("click", function () {
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         console.log("User :", user);
+        document.querySelector("#welcomeMessage").innerText = 'Welcome back, ' + user.email
+        document.querySelector("#dashboardName").innerText = user.email
+        
     } else {
         console.log("Unavailable user");
+        window.location.href = "index.html"
     }
 });

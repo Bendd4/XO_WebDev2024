@@ -216,3 +216,12 @@ function removeGameToken(location) {
     // console.log(positionID);
     document.getElementById(positionID).innerText = '';
 }
+
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        console.log("User :", user); 
+    } else {
+        console.log("Unavailable user");
+        window.location.href = "index.html"
+    }
+});
