@@ -48,7 +48,7 @@ function checkResult() {
                         hwin++;
                         temp.add(loc);
                     }
-                    else{
+                    else {
                         hwin = 0;
                     }
                 } else {
@@ -75,7 +75,7 @@ function checkResult() {
                         vwin++;
                         temp.add(loc);
                     }
-                    else{
+                    else {
                         vwin = 0;
                     }
                 } else {
@@ -89,24 +89,48 @@ function checkResult() {
         temp.clear();
     }
 
-    // Diagonal (please God help me)
-    let dwin = 0
-    // console.log(shapeLoc);
-    for (let loc of shapeLoc) {
-        let checkset = new Array(( parseInt(loc[0]) +1).toString(), ( parseInt(loc[0]) +1).toString(), (turn))
-        console.log(checkset)
-        shapeLoc = new Set([...shapeLoc, checkset])
-        if (shapeLoc.has(checkset)) {
-            dwin++;
-            console.log("the condition works")
-            temp.add(loc);
-        }
-        // console.log(loc)
-        console.log(shapeLoc);
-        // console.log( [( parseInt(loc[0]) +1).toString(), ( parseInt(loc[0]) +1).toString(), (turn)] );
+    // Diagonal | \\\\ | (please God help me)
 
-    }
+
+    // let d1win = 0
+    // let checkset = [0, 0, document.getElementById("A0").innerText];
+    // for (let loc of shapeLoc) {
+    //     // break;
+
+    //     // console.log(checkset)
+    //     // shapeLoc = new Set([...shapeLoc, checkset])
+    //     if (checkset[2] == loc[2]) {
+    //         if (loc[0] == checkset[0] && loc[1] == checkset[1]) {
+    //             console.log(checkset[2])
+    //             if (loc[2] == checkset[2]) {
+    //                 d1win++;
+    //                 temp.add(loc);
+    //                 // console.log(temp);
+    //             }
+    //             else {
+    //                 console.log("D win reset")
+    //                 d1win = 0;
+    //             }
+
+
+    //         }
+    //         checkset = loc;
+    //     }
+
+    //     console.log(temp)
+    //     if (d1win >= 3) {
+    //         sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
+    //     }
+
+    //     // console.log(loc)
+    //     // console.log(shapeLoc);
+
+    //     // console.log( [( parseInt(loc[0]) +1).toString(), ( parseInt(loc[0]) +1).toString(), (turn)] );
+
+
+    // }
     console.log(shapeLoc);
+    // console.log(sameShapeLoc);
     temp.clear();
 
     // if (document.getElementById("A0").innerText == turn){
@@ -116,34 +140,304 @@ function checkResult() {
     // }
 
 
-    // if ((   document.getElementById("A0").innerText == turn &&
-    //         document.getElementById("B1").innerText == turn &&
-    //         document.getElementById("C2").innerText == turn) 
-    //         ||
-    //     (   document.getElementById("A2").innerText == turn &&
-    //         document.getElementById("B1").innerText == turn &&
-    //         document.getElementById("C0").innerText == turn
-    //     )) 
-    //     {
-    //     win = true 
-    // }
+    // Diagonal | \\\\ |
+    let runner = 0;
+    if (document.getElementById("B1").innerText == turn &&
+        document.getElementById("C2").innerText == turn) {
+        if (document.getElementById("A0").innerText == turn) {
+            // temp.add(shapeLoc[5]);
+            for (let loc of shapeLoc) {
+                runner++;
+                if (runner > 5) {
+                    temp.add(loc)
+                    runner = 0;
+                    break;
+                }
+            }
+            // temp.add(shapeLoc[10]);
+            for (let loc of shapeLoc) {
+                runner++;
+                if (runner > 10) {
+                    temp.add(loc)
+                    runner = 0;
+                    break;
+                }
+            }
+            // temp.add(shapeLoc[0]);
+            for (let loc of shapeLoc) {
+                runner++;
+                if (runner > 0) {
+                    temp.add(loc)
+                    runner = 0;
+                    break;
+                }
+            }
+            sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
+            console.log(temp)
+            temp.clear()
+        }
+        if (document.getElementById("D3").innerText == turn) {
+            // temp.add(shapeLoc[5]);
+            for (let loc of shapeLoc) {
+                runner++;
+                if (runner > 5) {
+                    temp.add(loc)
+                    runner = 0;
+                    break;
+                }
+            }
+            // temp.add(shapeLoc[10]);
+            for (let loc of shapeLoc) {
+                runner++;
+                if (runner > 10) {
+                    temp.add(loc)
+                    runner = 0;
+                    break;
+                }
+            }
+            // temp.add(shapeLoc[15]);
+            for (let loc of shapeLoc) {
+                runner++;
+                if (runner > 15) {
+                    temp.add(loc)
+                    runner = 0;
+                    break;
+                }
+            }
+            sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
+            console.log(temp)
+            temp.clear()
+        }
+    }
+    if (document.getElementById("B0").innerText == turn &&
+        document.getElementById("C1").innerText == turn &&
+        document.getElementById("D2").innerText == turn) {
+        // temp.add(shapeLoc[4]);
+        for (let loc of shapeLoc) {
+            runner++;
+            if (runner > 4) {
+                temp.add(loc)
+                runner = 0;
+                break;
+            }
+        }
+        // temp.add(shapeLoc[9]);
+        for (let loc of shapeLoc) {
+            runner++;
+            if (runner > 9) {
+                temp.add(loc)
+                runner = 0;
+                break;
+            }
+        }
+        // temp.add(shapeLoc[14]);
+        for (let loc of shapeLoc) {
+            runner++;
+            if (runner > 14) {
+                temp.add(loc)
+                runner = 0;
+                break;
+            }
+        }
+        sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
+        console.log(temp)
+        temp.clear()
+    }
+    if (document.getElementById("A1").innerText == turn &&
+        document.getElementById("B2").innerText == turn &&
+        document.getElementById("C3").innerText == turn) {
+        // temp.add(shapeLoc[1]);
+        for (let loc of shapeLoc) {
+            runner++;
+            if (runner > 1) {
+                temp.add(loc)
+                runner = 0;
+                break;
+            }
+        }
+        // temp.add(shapeLoc[6]);
+        for (let loc of shapeLoc) {
+            runner++;
+            if (runner > 6) {
+                temp.add(loc)
+                runner = 0;
+                break;
+            }
+        }
+        // temp.add(shapeLoc[11]);
+        for (let loc of shapeLoc) {
+            runner++;
+            if (runner > 11) {
+                temp.add(loc)
+                runner = 0;
+                break;
+            }
+        }
+        sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
+        console.log(temp)
+        temp.clear()
+    }
+
+    // Diagonal | //// |
+    if (document.getElementById("B2").innerText == turn &&
+        document.getElementById("C1").innerText == turn) {
+        if (document.getElementById("A3").innerText == turn) {
+            // temp.add(shapeLoc[6]);
+            for (let loc of shapeLoc) {
+                runner++;
+                if (runner > 6) {
+                    temp.add(loc)
+                    runner = 0;
+                    break;
+                }
+            }
+            // temp.add(shapeLoc[9]);
+            for (let loc of shapeLoc) {
+                runner++;
+                if (runner > 9) {
+                    temp.add(loc)
+                    runner = 0;
+                    break;
+                }
+            }
+            // temp.add(shapeLoc[3]);
+            for (let loc of shapeLoc) {
+                runner++;
+                if (runner > 3) {
+                    temp.add(loc)
+                    runner = 0;
+                    break;
+                }
+            }
+            sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
+            console.log(temp)
+            temp.clear()
+        }
+        if (document.getElementById("D0").innerText == turn) {
+            // temp.add(shapeLoc[6]);
+            for (let loc of shapeLoc) {
+                runner++;
+                if (runner > 6) {
+                    temp.add(loc)
+                    runner = 0;
+                    break;
+                }
+            }
+            // temp.add(shapeLoc[9]);
+            for (let loc of shapeLoc) {
+                runner++;
+                if (runner > 9) {
+                    temp.add(loc)
+                    runner = 0;
+                    break;
+                }
+            }
+            // temp.add(shapeLoc[12]);
+            for (let loc of shapeLoc) {
+                runner++;
+                if (runner > 12) {
+                    temp.add(loc)
+                    runner = 0;
+                    break;
+                }
+            }
+            sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
+            // console.log(temp)
+            temp.clear()
+        }
+    }
+    if (document.getElementById("A2").innerText == turn &&
+        document.getElementById("B1").innerText == turn &&
+        document.getElementById("C0").innerText == turn) {
+        // temp.add(shapeLoc[2]);
+        for (let loc of shapeLoc) {
+            runner++;
+            if (runner > 2) {
+                temp.add(loc)
+                runner = 0;
+                break;
+            }
+        }
+        // temp.add(shapeLoc[5]);
+        for (let loc of shapeLoc) {
+            runner++;
+            if (runner > 5) {
+                temp.add(loc)
+                runner = 0;
+                break;
+            }
+        }
+        // temp.add(shapeLoc[8]);
+        for (let loc of shapeLoc) {
+            runner++;
+            if (runner > 8) {
+                temp.add(loc)
+                runner = 0;
+                break;
+            }
+        }
+        sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
+        console.log(temp)
+        temp.clear()
+    }
+    if (document.getElementById("B3").innerText == turn &&
+        document.getElementById("C2").innerText == turn &&
+        document.getElementById("D1").innerText == turn) {
+        // temp.add(shapeLoc[7]);
+        for (let loc of shapeLoc) {
+            runner++;
+            if (runner > 7) {
+                temp.add(loc)
+                runner = 0;
+                break;
+            }
+        }
+        // temp.add(shapeLoc[10]);
+        for (let loc of shapeLoc) {
+            runner++;
+            if (runner > 10) {
+                temp.add(loc)
+                runner = 0;
+                break;
+            }
+        }
+        // temp.add(shapeLoc[13]);
+        for (let loc of shapeLoc) {
+            runner++;
+            if (runner > 13) {
+                temp.add(loc)
+                runner = 0;
+                break;
+            }
+        }
+        sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
+        console.log(temp)
+        temp.clear()
+    }
+
+
+    console.log(sameShapeLoc)
+    // console.log(temp)
+
+
+
 
     if (turn == "X") {
         score_X += sameShapeLoc.size;
-        for (let scoreXTextObj of document.querySelectorAll("#scoreX")){
+        for (let scoreXTextObj of document.querySelectorAll("#scoreX")) {
             // console.log(scoreXTextObj)
-            scoreXTextObj.innerText = score_X+" / 14"
+            scoreXTextObj.innerText = score_X + " / 14"
         }
-        for (let loc of sameShapeLoc){
+        for (let loc of sameShapeLoc) {
             removeGameToken(loc);
         }
     }
-    else{
+    else {
         score_O += sameShapeLoc.size;
-        for (let scoreOTextObj of document.querySelectorAll("#scoreO")){
-            scoreOTextObj.innerText = score_O+" / 14"
+        for (let scoreOTextObj of document.querySelectorAll("#scoreO")) {
+            scoreOTextObj.innerText = score_O + " / 14"
         }
-        for (let loc of sameShapeLoc){
+        for (let loc of sameShapeLoc) {
             removeGameToken(loc);
         }
     }
@@ -158,12 +452,20 @@ function checkResult() {
     }
 
     // console.log(win)
+    if (score_X >= 16) {
+        win = true
+    }
+    else {
+        if (score_O >= 16) {
+            win = true
+        }
+    }
 
     if (win) {
         //Game end and someone wins the game
         // winner = turn;
         // turnObject.innerHTML = "Game win by " + winner;
-        if (turn = 'O' ) {
+        if (turn = 'O') {
             // score_O += 1;
             // score_OShow.innerText = score_O + ''
         }
@@ -219,7 +521,7 @@ function removeGameToken(location) {
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        console.log("User :", user); 
+        console.log("User :", user);
     } else {
         console.log("Unavailable user");
         window.location.href = "index.html"
