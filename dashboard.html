@@ -31,11 +31,11 @@
           </div>
         </a>
         <div class="h-25 row h3 mx-0 my-4">
-          <div class="col h-25 dashboardButton pt-5 me-3" style="height: 100% !important;"
-            onclick="prompt('Enter room code.')">
+          <div class="col h-25 dashboardButton pt-5 me-3" id="join-lobby" style="height: 100% !important;"
+            >
             JOIN
           </div>
-          <div class="col h-25 dashboardButton pt-5" style="height: 100% !important;">
+          <div class="col h-25 dashboardButton pt-5" id="create-lobby" style="height: 100% !important;">
             CREATE
           </div>
         </div>
@@ -125,6 +125,7 @@
     const firebaseConfig = {
       apiKey: "AIzaSyBH-NrK-N9irEIDfsEa7ti97BrApjTq1_k",
       authDomain: "tic-tac-point-database.firebaseapp.com",
+      databaseURL: "https://tic-tac-point-database-default-rtdb.asia-southeast1.firebasedatabase.app",
       projectId: "tic-tac-point-database",
       storageBucket: "tic-tac-point-database.appspot.com",
       messagingSenderId: "791873608376",
@@ -135,6 +136,7 @@
   </script>
   <script src="script/uiscript.js"></script>
   <script src="script/dashboard.js"></script>
+  <script src="script/multiplayer.js"></script>
 </body>
 
 </html>

@@ -1,14 +1,21 @@
+const playerRef = firebase.database().ref("PlayerList");
+
 const loginForm = document.querySelector("#login-form");
 loginForm.addEventListener("submit", loginUser);
 
 function loginUser(event) {
     event.preventDefault();
+    const currentUser = firebase.auth().currentUser;
     const username = loginForm["usernameInput"].value;
     const password = loginForm["passwordInput"].value;
 
     firebase.auth().signInWithEmailAndPassword(username, password)
         .then(() => {
             console.log("User Logged-in");
+            playerRef.child(currentUser.uid).update({
+                ["player-email"]: currentUser.email,
+                ["status"]: "non",
+            })
             window.location.href = "dashboard.html";
         })
         .catch((error) => {
