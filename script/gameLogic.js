@@ -2,6 +2,10 @@ var turn = 'X'
 var win = false;
 var winner = '';
 var score_X = 0;
+var winscore_X = 0;
+var winscore_O = 0;
+var losescore_X = 0;
+var losescore_O = 0;
 var score_XShow = document.querySelector('#scoreX')
 var score_O = 0;
 var score_OShow = document.querySelector('#scoreO')
@@ -419,7 +423,12 @@ function checkResult() {
     console.log(sameShapeLoc)
     // console.log(temp)
 
-
+    console.log("----------------");
+    console.log("WinX: " + winscore_X);
+    console.log("WinO: " + winscore_O);
+    console.log("loseX: " + losescore_X);
+    console.log("loseO: " + losescore_O);
+    console.log("----------------");
 
 
     if (turn == "X") {
@@ -427,6 +436,13 @@ function checkResult() {
         for (let scoreXTextObj of document.querySelectorAll("#scoreX")) {
             // console.log(scoreXTextObj)
             scoreXTextObj.innerText = score_X + " / 14"
+            if ((score_X >= 14)) {
+                score_X = 0;
+                score_O = 0;
+                winscore_X += 1;
+                losescore_O += 1;
+                
+            }
         }
         for (let loc of sameShapeLoc) {
             removeGameToken(loc);
@@ -436,6 +452,12 @@ function checkResult() {
         score_O += sameShapeLoc.size;
         for (let scoreOTextObj of document.querySelectorAll("#scoreO")) {
             scoreOTextObj.innerText = score_O + " / 14"
+            if ((score_O >= 14)) {
+                score_X = 0;
+                score_O = 0;
+                winscore_O += 1;
+                losescore_X += 1;
+            }
         }
         for (let loc of sameShapeLoc) {
             removeGameToken(loc);
