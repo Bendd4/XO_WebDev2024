@@ -51,7 +51,8 @@ function createLobby() {
             alert(`Room Created, Room Key is ${roomKey}`);
 
             playerRef.child(currentUser.uid).update({
-                ["status"]: roomKey,
+                currentRoom: roomKey,
+                status: "Playing",
             })
 
             createGame.removeEventListener("click", createLobby);
@@ -74,7 +75,8 @@ function cancelLobby() {
         if (snapshot.child("room-key").val() == currentKey) {
             // console.log(snapshot.child("room-key").val())
             playerRef.child(currentUser.uid).update({
-                ["status"]: "non",
+                currentRoom: "",
+                status: "non",
             })
 
             gameRoomRef.child(`room_${currentKey}`).remove();
@@ -104,7 +106,8 @@ function joinLobby() {
                 ["player-o-uid"]: currentUser.uid,
             })
             playerRef.child(currentUser.uid).update({
-                ["status"]: inputKey,
+                currentRoom: inputKey,
+                status: "Playing",
             });
 
             gameRoomRef.child(`room_${inputKey}`).update({
@@ -136,6 +139,9 @@ gameRoomRef.on("value", (snapshot) => {
                         console.log("==============================");
                         console.log(gameInfo[key]);
                         alert("Opponent's Found, game is about to start")
+
+                        // gameInfo[key] == "Playing"
+
                         window.location.href = "gameboard.html";
                     }
                     // if (gameInfo[key] == "non") {
