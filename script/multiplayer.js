@@ -79,11 +79,12 @@ function cancelLobby() {
     })
 }
 
-const joinGame = document.querySelector("#join-lobby");
-joinGame.addEventListener("click", joinLobby);
+//const joinGame = document.querySelector("#join-lobby");
+//joinGame.addEventListener("click", joinLobby);
 
 function joinLobby(){
-    inputKey = prompt('Enter room code.');
+    inputKey = document.getElementById("roomCodeInput").value
+    /*inputKey = prompt('Enter room code.');*/
     gameRoomRef.child(`room_${inputKey}`).once("value").then((snapshot) => {
         if (snapshot.child("room-key").val() == inputKey) {
             console.log("==============================");

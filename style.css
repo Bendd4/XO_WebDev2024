@@ -21,6 +21,22 @@ a:hover{
 }
 
 /* for dashboard */
+#roomCodeInputDiv{
+  position: absolute;
+  height: 30%;
+  left:25%;
+  top:-100%;
+  z-index: 1 !important;
+  border: 1px solid white !important;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+#roomCodeInput{
+  width: 50%;
+  font-size: 1.5vw;
+  text-align: center;
+}
+
 #playerDetailExpanded{
   position: absolute !important;
   height: 450px;

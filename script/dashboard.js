@@ -19,7 +19,7 @@ firebase.auth().onAuthStateChanged((user) => {
         document.querySelector("#dashboardName").innerText = user.email
         
     } else {
-        console.log("Unavailable user");
+        console.log("Unavailable user from dash");
         window.location.href = "index.html"
     }
 });

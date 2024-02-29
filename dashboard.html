@@ -18,6 +18,17 @@
 </head>
 
 <body class="logged-in bg-dark text-white text-center">
+  <div id="roomCodeInputDiv" class='bg-dark text-white text-center w-50'>
+    <div class="my-4">
+      <div class="m-4" style="font-size: 1.5vw;">Enter the room code :</div>
+      <input type="text" id="roomCodeInput" maxlength="4">
+      <div class="container row mt-4" style="justify-content: center;">
+        <button class="col-3 mx-2 btn btn-dark" onclick="closeRoomInput()" style="border:1px solid white ; font-size: 1vw;" type="button">Cancel</button>
+        <button class="col-3 mx-2 btn btn-dark" onclick="joinLobby()" style="border:1px solid white ; font-size: 1vw;" type="submit">Submit</button>
+      </div> 
+    </div>
+    
+  </div>
   <!-- PC -->
   <div class="container h-100" id="dashboardLarge">
     <div class="row my-5" style="height: 85% !important;">
@@ -31,7 +42,7 @@
           </div>
         </a>
         <div class="h-25 row h3 mx-0 my-4">
-          <div class="col h-25 dashboardButton pt-5 me-3" id="join-lobby" style="height: 100% !important;"
+          <div class="col h-25 dashboardButton pt-5 me-3" id="join-lobby" onclick="openRoomInput()" style="height: 100% !important;"
             >
             JOIN
           </div>
@@ -88,7 +99,7 @@
             FIND MATCH
           </div>
         </a>
-        <div class="pt-4 pb-4 dashboardButton mb-4" onclick="prompt('Enter room code.')">
+        <div class="pt-4 pb-4 dashboardButton mb-4" onclick="openRoomInput()">
           JOIN
         </div>
         <div class="pt-4 pb-4 dashboardButton mb-4">
@@ -133,6 +144,22 @@
       measurementId: "G-BX607FZN5Y"
     };
     firebase.initializeApp(firebaseConfig);
+
+    function openPlayerDetail() {
+      document.getElementById("playerDetailExpanded").style.top = "0px";
+    }
+    function closePlayerDetail() {
+      document.getElementById("playerDetailExpanded").style.top = "-450px";
+    }
+
+    function openRoomInput() {
+      document.getElementById("roomCodeInputDiv").style.top = "25%";
+      createGame.removeEventListener("click", createLobby);
+    }
+    function closeRoomInput() {
+      document.getElementById("roomCodeInputDiv").style.top = "-100%";
+      createGame.addEventListener("click", createLobby);
+    }
   </script>
   <script src="script/uiscript.js"></script>
   <script src="script/dashboard.js"></script>
