@@ -3,4 +3,3 @@ function leaveTheMatchEarly() {
         return false;
     }
 }
-
