@@ -14,6 +14,13 @@ var blocks = document.querySelectorAll('.table-block');
 
 newGame();
 
+document.querySelector(".xPlayerCard").style.opacity = 1
+document.querySelector(".oPlayerCard").style.opacity = 0.25
+document.querySelector(".xPlayerCardm").style.opacity = 1
+document.querySelector(".oPlayerCardm").style.opacity = 0.25
+document.querySelector(".xPlayerCards").style.opacity = 1
+document.querySelector(".oPlayerCards").style.opacity = 0.25
+
 for (var block of blocks) {
     // 1. Modify the code here to check click event on each block
     block.onclick = function (event) {
@@ -24,6 +31,21 @@ for (var block of blocks) {
             if (event.target.innerHTML == '') {
                 event.target.innerHTML = turn;
                 checkResult();
+            }
+            if (turn == 'X'){
+                document.querySelector(".xPlayerCard").style.opacity = 1
+                document.querySelector(".oPlayerCard").style.opacity = 0.25
+                document.querySelector(".xPlayerCardm").style.opacity = 1
+                document.querySelector(".oPlayerCardm").style.opacity = 0.25
+                document.querySelector(".xPlayerCards").style.opacity = 1
+                document.querySelector(".oPlayerCards").style.opacity = 0.25
+            }else if (turn == 'O'){
+                document.querySelector(".xPlayerCard").style.opacity = 0.25
+                document.querySelector(".oPlayerCard").style.opacity = 1
+                document.querySelector(".xPlayerCardm").style.opacity = 0.25
+                document.querySelector(".oPlayerCardm").style.opacity = 1
+                document.querySelector(".xPlayerCards").style.opacity = 0.25
+                document.querySelector(".oPlayerCards").style.opacity = 1
             }
         }
     }
@@ -476,11 +498,11 @@ function checkResult() {
     // console.log(win)
     if (score_X >= 16) {
         win = true
+        console.log("X won")
     }
-    else {
-        if (score_O >= 16) {
-            win = true
-        }
+    else if(score_O >= 16) {
+        win = true
+        console.log("O won")
     }
 
     if (win) {

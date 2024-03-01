@@ -80,6 +80,10 @@ gameRoomRef.on("value", (snapshot) => {
                             gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
                                 document.querySelector("#player-x-email").innerHTML = snapshot.child("player").child("player-x-email").val()
                                 document.querySelector("#player-o-email").innerHTML = snapshot.child("player").child("player-o-email").val()
+                                document.querySelector("#player-x-emailm").innerHTML = snapshot.child("player").child("player-x-email").val()
+                                document.querySelector("#player-o-emailm").innerHTML = snapshot.child("player").child("player-o-email").val()
+                                document.querySelector("#player-x-emails").innerHTML = snapshot.child("player").child("player-x-email").val()
+                                document.querySelector("#player-o-emails").innerHTML = snapshot.child("player").child("player-o-email").val()
                             })
                         })
                     }
