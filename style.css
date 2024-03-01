@@ -80,6 +80,28 @@ a:hover{
 
 
 /* gameboard */
+#winnerAnnoucmentDiv{
+  position: absolute;
+  transform: rotate(-2deg);
+  height: 40%;
+  width: 120%;
+  left:-150%;
+  top:30%;
+  z-index: 1 !important;
+  /*border: 1px solid white !important;*/
+  border-top: 10px  solid pink;
+  border-bottom: 10px  solid pink;
+  border-image: repeating-linear-gradient(
+    -55deg,
+    #000,
+    #000 20px,
+    #ffb101 20px,
+    #ffb101 40px
+  ) 10;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
 .xPlayerCard::after{ 
   display: inline-block;
   position: relative;
