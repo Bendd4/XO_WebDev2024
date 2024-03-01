@@ -463,6 +463,8 @@ function checkResult() {
                 score_O = 0;
                 winscore_X += 1;
                 losescore_O += 1;
+                winner = 'X';
+                annouceWinner(winner);
                 
             }
         }
@@ -475,10 +477,12 @@ function checkResult() {
         for (let scoreOTextObj of document.querySelectorAll("#scoreO")) {
             scoreOTextObj.innerText = score_O + " / 14"
             if ((score_O >= 14)) {
-                score_X = 0;
-                score_O = 0;
+                winner = 'O';
+                annouceWinner(winner);
                 winscore_O += 1;
                 losescore_X += 1;
+                score_X = 0;
+                score_O = 0;
             }
         }
         for (let loc of sameShapeLoc) {
