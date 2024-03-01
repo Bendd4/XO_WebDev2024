@@ -19,24 +19,24 @@
     <div class="container row m-auto mt-5 h-100" >
         
         <div class="row container h-25 mb-4" id="playerInfoCardsSmall">
-            <div class="row h-50 mb-3 ms-4" style="border: 2px solid white;">
+            <div class="row h-50 mb-3 ms-4 xPlayerCards" style="border: 2px solid white;">
                 <div class="col text-start pt-4 display-6" style="font-size: 5vw;">${USERNAME}</div>
                 <div id="scoreX" class="col text-end pe-3 pt-4 display-6" style="font-size: 7vw;">0 / 14</div>
             </div>
-            <div class="row h-50 mb-3 ms-4" style="border: 2px solid white;">
+            <div class="row h-50 mb-3 ms-4 oPlayerCards" style="border: 2px solid white;">
                 <div class="col text-start pt-4 display-6" style="font-size: 5vw;">${USERNAME}</div>
                 <div id="scoreO" class="col text-end pe-3 pt-4 display-6" style="font-size: 7vw;">0 / 14</div>
             </div>
         </div>
         
         <div class="row mb-4" id="playerInfoCardsMedium">
-            <div class="col me-5 pt-3" style="border: 2px solid white;">
-                <div class="col text-start" style="font-size: 3vw;">${USERNAME}</div>
-                <div id="scoreX" class="col text-end mt-3" style="font-size: 4vw;">0 / 14</div>
+            <div class="col me-5 pt-3 xPlayerCardm" style="border: 2px solid white;">
+                <div class="col text-start" style="font-size: 2.5vw;">${USERNAME}</div>
+                <div id="scoreX" class="col text-end mt-3" style="font-size: 3vw;">0 / 14</div>
             </div>
-            <div class="col ms-5 pt-3" style="border: 2px solid white;">
-                <div class="col text-end" style="font-size: 3vw;">${USERNAME}</div>
-                <div id="scoreO" class="col text-start mt-3" style="font-size: 4vw;">0 / 14</div>
+            <div class="col ms-5 pt-3 oPlayerCardm" style="border: 2px solid white;">
+                <div class="col text-end" style="font-size: 2.5vw;">${USERNAME}</div>
+                <div id="scoreO" class="col text-start mt-3" style="font-size: 3vw;">0 / 14</div>
             </div>
         </div>
 
@@ -83,7 +83,7 @@
         <!-- playing board -->
         
         <div class="container col-5 h-75" id="playerInfoCardsLarge">
-            <div class="mx-3 mt-auto pb-4" style="border: 2px solid white; height: 45%;">
+            <div class="mx-3 mt-auto pb-4 xPlayerCard" style="border: 2px solid white; height: 45%;">
                 <div class="row display-6 h-75">
                     <div class="col-8 text-start pt-5 ps-5" id="player-x-email" style="font-size: 2vw;">
                         ${USERNAME}
@@ -96,7 +96,7 @@
                     0 / 14
                 </div>
             </div>
-            <div class="mx-3 mt-5 pb-4" style="border: 2px solid white; height: 45%;">
+            <div class="mx-3 mt-5 pb-4 oPlayerCard" style="border: 2px solid white; height: 45%;">
                 <div class="row display-6 h-75">
                     <div class="col-8 text-start pt-5 ps-5" id="player-o-email" style="font-size: 2vw;">
                         ${USERNAME}

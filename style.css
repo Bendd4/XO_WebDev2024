@@ -80,6 +80,33 @@ a:hover{
 
 
 /* gameboard */
+.xPlayerCard::after{ 
+  display: inline-block;
+  position: relative;
+  top: -63%;
+  content: "";
+  width: 10rem;
+  height: 10rem;
+  background-image: url(image/turnxbg.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.25;
+  z-index: -1;
+}
+.oPlayerCard::after{ 
+  display: inline-block;
+  position: relative;
+  top: -63%;
+  content: "";
+  width: 10rem;
+  height: 10rem;
+  background-image: url(image/turnobg.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.25;
+  z-index: -1;
+}
+
 #playerInfoCardsSmall{
   display: none;
 }
@@ -112,6 +139,30 @@ a:hover{
   /*html{
     background-color: blue;
   }*/
+  .xPlayerCards::after{ 
+    display: inline-block;
+    position: absolute;
+    content: "";
+    width: 5.2rem;
+    height: 5.2rem;
+    background-image: url(image/turnxbg.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.25;
+    z-index: -999;
+  }
+  .oPlayerCards::after{ 
+    display: inline-block;
+    position: absolute;
+    content: "";
+    width: 5.2rem;
+    height: 5.2rem;
+    background-image: url(image/turnobg.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.25;
+    z-index: -999;
+  }
   #playerInfoCardsLarge{
     display: none;
   }
@@ -146,6 +197,31 @@ a:hover{
 } 
 
 @media only screen and (min-width:576px) and (max-width: 992px) {
+  .xPlayerCardm::after{ 
+    display: inline-block;
+    content: "";
+    width: 5rem;
+    height: 5rem;
+    background-image: url(image/turnxbg.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    opacity: 0.25;
+    z-index: -1;
+  }
+  .oPlayerCardm::after{ 
+    display: inline-block;
+    position: relative;
+    content: "";
+    width: 5rem;
+    height: 5rem;
+    background-image: url(image/turnobg.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right top;
+    opacity: 0.25;
+    z-index: -1;
+  }
   /*html{
     background-color: blue;
   }*/
