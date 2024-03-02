@@ -17,6 +17,8 @@ firebase.auth().onAuthStateChanged((user) => {
         console.log("User :", user);
         document.querySelector("#welcomeMessage").innerText = 'Welcome back, ' + user.email
         document.querySelector("#dashboardName").innerText = user.email
+        document.querySelector("#dashboardNameSmall").innerText = user.email
+        dashboardNameSmall
         
     } else {
         console.log("Unavailable user from dash");

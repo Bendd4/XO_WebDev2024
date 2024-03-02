@@ -2,7 +2,9 @@ const gameRoomRef = firebase.database().ref("Room");
 const playerRef = firebase.database().ref("PlayerList");
 
 const createGame = document.querySelector("#create-lobby");
+const createGameSmall = document.querySelector("#create-lobby-small");
 createGame.addEventListener("click", createLobby);
+createGameSmall.addEventListener("click", createLobby);
 
 let currentKey = "";
 
@@ -56,11 +58,16 @@ function createLobby() {
             })
 
             createGame.removeEventListener("click", createLobby);
+            createGameSmall.removeEventListener("click", createLobby);
             createGame.innerHTML = `          
                 <p>Room: ${roomKey}</p> 
                 <p style="font-size: 20px;">Click Again to leave</p>
             `;
+            createGameSmall.innerHTML = `          
+                <p>Room: ${roomKey} Click Again to leave</p> 
+            `;
             createGame.addEventListener("click", cancelLobby)
+            createGameSmall.addEventListener("click", cancelLobby)
         }
         else {
             alert("Sorry, Please try again")
@@ -83,6 +90,9 @@ function cancelLobby() {
             createGame.removeEventListener("click", cancelLobby);
             createGame.innerHTML = `CREATE`;
             createGame.addEventListener("click", createLobby);
+            createGameSmall.removeEventListener("click", cancelLobby);
+            createGameSmall.innerHTML = `CREATE`;
+            createGameSmall.addEventListener("click", createLobby);
             alert(`You canceled Room: ${currentKey}`);
 
             console.log("==============================");

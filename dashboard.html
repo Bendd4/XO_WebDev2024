@@ -78,6 +78,8 @@
             <p class="text-end h4">Highest Win Streak : XXX</p>
             <p class="text-end h4">Current Win Streak : XXX</p>
             <hr style="border-top: 2px solid rgb(255, 255, 255);">
+            <div class="h4 dashboardButton mt-4 p-3"><a href="leaderboard.html">Leaderboard</a></div>
+            
           </div>
         </div>
       </div>
@@ -102,7 +104,7 @@
         <div class="pt-4 pb-4 dashboardButton mb-4" onclick="openRoomInput()">
           JOIN
         </div>
-        <div class="pt-4 pb-4 dashboardButton mb-4">
+        <div class="pt-4 pb-4 dashboardButton mb-4" id="create-lobby-small">
           CREATE
         </div>
         <a href="tutorial.html">
@@ -118,14 +120,15 @@
       </div>
 
       <div class="container p-5 w-100" style="background-color: rgb(20, 20, 20);" id="playerDetailExpanded">
-        <p class="text-start h1 fw-bold mb-5">${USERNAME}</p>
+        <p class="text-start h1 fw-bold mb-5" id="dashboardNameSmall">${USERNAME}</p>
         <p class="text-end h4">Total Match Played : XXX</p>
         <p class="text-end h4">Match Won : XXX</p>
         <p class="text-end h4">Match Lost : XXX</p>
         <p class="text-end h4">Winrate: X.XX</p>
         <p class="text-end h4">Highest Win Streak : XXX</p>
         <p class="text-end h4">Current Win Streak : XXX</p>
-        <div class="mt-5 h1"><a onclick="closePlayerDetail()"><i class="bi bi-x-circle"></i></a></div>
+        <div class="h6 dashboardButton mt-4 p-3"><a href="leaderboard.html">Leaderboard</a></div>
+        <div class="mt-4 h1"><a onclick="closePlayerDetail()"><i class="bi bi-x-circle"></i></a></div>
 
       </div>
 
@@ -149,7 +152,7 @@
       document.getElementById("playerDetailExpanded").style.top = "0px";
     }
     function closePlayerDetail() {
-      document.getElementById("playerDetailExpanded").style.top = "-450px";
+      document.getElementById("playerDetailExpanded").style.top = "-550px";
     }
 
     function openRoomInput() {
