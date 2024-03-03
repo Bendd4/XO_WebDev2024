@@ -9,15 +9,11 @@ function leaveTheMatchEarly() {
         return false;
     } else {
         const currentUser = firebase.auth().currentUser;
-        // playerRef.child(currentUser.uid).update({
-        //     ["status"]: "non",
-        // })
         playerRef.child(currentUser.uid).child("currentRoom").once("value").then((roomNum) => {
             let playerRoom = roomNum.val()
             gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
                 if (snapshot.child("room-key").val() == playerRoom &&
                     snapshot.child("player").child("player-x-email").val() == currentUser.email) {
-                    // console.log("clear")
                     playerRef.child(currentUser.uid).update({
                         currentRoom: "",
                         status: "non",
@@ -33,7 +29,6 @@ function leaveTheMatchEarly() {
                 }
                 if (snapshot.child("room-key").val() == playerRoom &&
                     snapshot.child("player").child("player-o-email").val() == currentUser.email) {
-                    // console.log("clear")
                     gameRoomRef.child(`room_${playerRoom}`).child("player").child("player-o-email").remove()
                     gameRoomRef.child(`room_${playerRoom}`).child("player").child("player-o-uid").remove()
                     gameRoomRef.child(`room_${playerRoom}`).update({
@@ -63,13 +58,19 @@ gameRoomRef.on("value", (snapshot) => {
                             let playerRoom = roomNum.val()
                             console.log("==============================");
                             console.log(gameInfo[key]);
-                            gameRoomRef.child(`room_${playerRoom}`).remove();
-                            playerRef.child(currentUser.uid).update({
-                                currentRoom: "",
-                                status: "non",
+                            gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
+                                if (playerRoom == snapshot.child("room-key").val() &&
+                                    snapshot.child("room-status").val() == "non") {
+                                    gameRoomRef.child(`room_${playerRoom}`).remove();
+                                    playerRef.child(currentUser.uid).update({
+                                        currentRoom: "",
+                                        status: "non",
+                                    })
+                                    alert("Player Left, game is about to end");
+                                    window.location.href = "dashboard.html";
+                                }
                             })
-                            alert("Player Left, game is about to end");
-                            window.location.href = "dashboard.html";
+
                         })
                     }
 

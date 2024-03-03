@@ -76,11 +76,9 @@ function createLobby() {
 }
 
 function cancelLobby() {
-    // console.log("click")
     const currentUser = firebase.auth().currentUser;
     gameRoomRef.child(`room_${currentKey}`).once("value").then((snapshot) => {
         if (snapshot.child("room-key").val() == currentKey) {
-            // console.log(snapshot.child("room-key").val())
             playerRef.child(currentUser.uid).update({
                 currentRoom: "",
                 status: "non",
@@ -102,13 +100,9 @@ function cancelLobby() {
     })
 }
 
-//const joinGame = document.querySelector("#join-lobby");
-//joinGame.addEventListener("click", joinLobby);
-
 function joinLobby() {
     const currentUser = firebase.auth().currentUser;
     inputKey = document.getElementById("roomCodeInput").value
-    //inputKey = prompt('Enter room code.');
     gameRoomRef.child(`room_${inputKey}`).once("value").then((snapshot) => {
         if (snapshot.child("room-key").val() == inputKey) {
             gameRoomRef.child(`room_${inputKey}`).child("player").update({
@@ -126,7 +120,6 @@ function joinLobby() {
 
             console.log("==============================");
             console.log("Room Found");
-            // alert(`You joined Room ${inputKey}`);
         }
         else {
             console.log("==============================");
@@ -139,57 +132,26 @@ function joinLobby() {
 gameRoomRef.on("value", (snapshot) => {
     snapshot.forEach((data) => {
         const gameInfo = data.val();
-        // console.log(gameInfo)
         Object.keys(gameInfo).forEach((key) => {
-            // console.log(key)
             switch (key) {
-                // case "player":
                 case "room-status":
                     if (gameInfo[key] == "Full") {
                         const currentUser = firebase.auth().currentUser;
                         playerRef.child(currentUser.uid).child("currentRoom").once("value").then((roomNum) => {
                             let playerRoom = roomNum.val()
                             gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
-                                if (playerRoom == snapshot.child("room-key").val()) {
+                                if (playerRoom == snapshot.child("room-key").val() && 
+                                snapshot.child("room-status").val() == "Full") {
                                     console.log("==============================");
                                     console.log(gameInfo[key]);
                                     alert("Opponent's Found, game is about to start")
 
-                                    // gameInfo[key] == "Playing"
-
                                     window.location.href = "gameboard.html";
-                            }
+                                }
                             })  
                         })
                     }
-                    // if (gameInfo[key] == "non") {
-                    //     console.log("==============================");
-                    //     console.log(gameInfo[key]);
-                    //     alert("Opponent's Left, game is about to end");
-                    //     gameRoomRef.child(`room_${currentKey}`).remove();
-                    //     window.location.href = "dashboard.html";
-                    // }
             }
         })
     })
 })
-
-
-// const leaveGame = document.querySelector("#leave-lobby");
-// leaveGame.addEventListener("click", leaveLobby);
-// function leaveLobby() {
-    
-// }
-
-
-// gameRoomRef.child(`room_${inputKey}`).once("value").then((snapshot) => {
-//     snapshot.forEach((data) => {
-//         if (data.child("player-x-email").val() != "" &&
-//             data.child("player-o-email").val() != "") {
-//             console.log("==============================");
-//             console.log("Room Full");
-//             console.log(data.child("player-x-email").val());
-//             console.log(data.child("player-o-email").val());
-//         }
-//     })
-// })
