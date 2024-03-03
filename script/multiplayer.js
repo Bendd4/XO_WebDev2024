@@ -146,13 +146,21 @@ gameRoomRef.on("value", (snapshot) => {
                 // case "player":
                 case "room-status":
                     if (gameInfo[key] == "Full") {
-                        console.log("==============================");
-                        console.log(gameInfo[key]);
-                        alert("Opponent's Found, game is about to start")
+                        const currentUser = firebase.auth().currentUser;
+                        playerRef.child(currentUser.uid).child("currentRoom").once("value").then((roomNum) => {
+                            let playerRoom = roomNum.val()
+                            gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
+                                if (playerRoom == snapshot.child("room-key").val()) {
+                                    console.log("==============================");
+                                    console.log(gameInfo[key]);
+                                    alert("Opponent's Found, game is about to start")
 
-                        // gameInfo[key] == "Playing"
+                                    // gameInfo[key] == "Playing"
 
-                        window.location.href = "gameboard.html";
+                                    window.location.href = "gameboard.html";
+                            }
+                            })  
+                        })
                     }
                     // if (gameInfo[key] == "non") {
                     //     console.log("==============================");
