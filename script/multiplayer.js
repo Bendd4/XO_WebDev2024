@@ -27,26 +27,28 @@ function createLobby() {
                 ["room-status"]: "Waiting Player",
             })
             gameRoomRef.child(`room_${roomKey}`).child("game-table").update({
-                ["row-1-col-1"]: "-",
-                ["row-1-col-2"]: "-",
-                ["row-1-col-3"]: "-",
-                ["row-1-col-4"]: "-",
-                ["row-2-col-1"]: "-",
-                ["row-2-col-2"]: "-",
-                ["row-2-col-3"]: "-",
-                ["row-2-col-4"]: "-",
-                ["row-3-col-1"]: "-",
-                ["row-3-col-2"]: "-",
-                ["row-3-col-3"]: "-",
-                ["row-3-col-4"]: "-",
-                ["row-4-col-1"]: "-",
-                ["row-4-col-2"]: "-",
-                ["row-4-col-3"]: "-",
-                ["row-4-col-4"]: "-",
+                ["turn"]: "X",
+                ["A0"]: "",
+                ["A1"]: "",
+                ["A2"]: "",
+                ["A3"]: "",
+                ["B0"]: "",
+                ["B1"]: "",
+                ["B2"]: "",
+                ["B3"]: "",
+                ["C0"]: "",
+                ["C1"]: "",
+                ["C2"]: "",
+                ["C3"]: "",
+                ["D0"]: "",
+                ["D1"]: "",
+                ["D2"]: "",
+                ["D3"]: "",
             })
             gameRoomRef.child(`room_${roomKey}`).child("player").update({
                 ["player-x-email"]: currentUser.email,
                 ["player-x-uid"]: currentUser.uid,
+                ["player-x-score"]: 0,
             })
             console.log("==============================");
             console.log("Room", roomKey, "is Created.");
@@ -108,6 +110,7 @@ function joinLobby() {
             gameRoomRef.child(`room_${inputKey}`).child("player").update({
                 ["player-o-email"]: currentUser.email,
                 ["player-o-uid"]: currentUser.uid,
+                ["player-o-score"]: 0,
             })
             playerRef.child(currentUser.uid).update({
                 currentRoom: inputKey,
@@ -152,6 +155,10 @@ gameRoomRef.on("value", (snapshot) => {
                         })
                     }
             }
+
+
+
+            
         })
     })
 })

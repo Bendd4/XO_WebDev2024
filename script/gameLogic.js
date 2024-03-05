@@ -29,23 +29,11 @@ for (var block of blocks) {
             // 4. Modify the code here to check whether the clicking block is avialable.
             // console.log(event.target.innerHTML)
             if (event.target.innerHTML == '') {
-                event.target.innerHTML = turn;
-                checkResult();
-            }
-            if (turn == 'X'){
-                document.querySelector(".xPlayerCard").style.opacity = 1
-                document.querySelector(".oPlayerCard").style.opacity = 0.25
-                document.querySelector(".xPlayerCardm").style.opacity = 1
-                document.querySelector(".oPlayerCardm").style.opacity = 0.25
-                document.querySelector(".xPlayerCards").style.opacity = 1
-                document.querySelector(".oPlayerCards").style.opacity = 0.25
-            }else if (turn == 'O'){
-                document.querySelector(".xPlayerCard").style.opacity = 0.25
-                document.querySelector(".oPlayerCard").style.opacity = 1
-                document.querySelector(".xPlayerCardm").style.opacity = 0.25
-                document.querySelector(".oPlayerCardm").style.opacity = 1
-                document.querySelector(".xPlayerCards").style.opacity = 0.25
-                document.querySelector(".oPlayerCards").style.opacity = 1
+                // event.target.getAttribute("id")
+                placeXOInDB(event.target.getAttribute("id"), event);
+                // event.target.innerHTML = turn;
+                // checkResult();
+                console.log(turn)
             }
         }
     }
@@ -115,55 +103,9 @@ function checkResult() {
         temp.clear();
     }
 
-    // Diagonal | \\\\ | (please God help me)
 
-
-    // let d1win = 0
-    // let checkset = [0, 0, document.getElementById("A0").innerText];
-    // for (let loc of shapeLoc) {
-    //     // break;
-
-    //     // console.log(checkset)
-    //     // shapeLoc = new Set([...shapeLoc, checkset])
-    //     if (checkset[2] == loc[2]) {
-    //         if (loc[0] == checkset[0] && loc[1] == checkset[1]) {
-    //             console.log(checkset[2])
-    //             if (loc[2] == checkset[2]) {
-    //                 d1win++;
-    //                 temp.add(loc);
-    //                 // console.log(temp);
-    //             }
-    //             else {
-    //                 console.log("D win reset")
-    //                 d1win = 0;
-    //             }
-
-
-    //         }
-    //         checkset = loc;
-    //     }
-
-    //     console.log(temp)
-    //     if (d1win >= 3) {
-    //         sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
-    //     }
-
-    //     // console.log(loc)
-    //     // console.log(shapeLoc);
-
-    //     // console.log( [( parseInt(loc[0]) +1).toString(), ( parseInt(loc[0]) +1).toString(), (turn)] );
-
-
-    // }
     console.log(shapeLoc);
-    // console.log(sameShapeLoc);
     temp.clear();
-
-    // if (document.getElementById("A0").innerText == turn){
-    //     let temp = new Set();
-
-
-    // }
 
 
     // Diagonal | \\\\ |
@@ -525,11 +467,12 @@ function checkResult() {
         console.log("Game draw")
     } else {
         // The game is on going
-        turn = turn === 'O' ? 'X' : 'O';
+        // turn = turn === 'O' ? 'X' : 'O';
         // turnObject.innerHTML = "Turn: " + turn;
     }
     console.log("------------------Finished Checking------------------")
 }
+
 function newGame() {
     turn = 'X';
     // turnObject.innerHTML = "Turn: " + turn;
@@ -543,6 +486,7 @@ function newGame() {
     }
     console.log("------------------Reset------------------")
 }
+
 function annouceWinner(winner) {
     document.getElementById('winnerAnnoucmentDiv').style.left = '-10%'
     document.getElementById('winnerAnnoucmentText').innerHTML = winner + ' WON!'
@@ -554,6 +498,8 @@ function removeGameToken(location) {
     switch (location[0]) {
         case "0":
             positionID = 'A' + location[1];
+            // Insert "Update" value in position to "" here
+            // removeXOTokenDB(location);
             break;
         case "1":
             positionID = 'B' + location[1];
