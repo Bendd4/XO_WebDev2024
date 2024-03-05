@@ -86,16 +86,20 @@ gameRoomRef.on("value", (snapshot) => {
                                 document.querySelector("#player-x-emails").innerHTML = snapshot.child("player").child("player-x-email").val()
                                 document.querySelector("#player-o-emails").innerHTML = snapshot.child("player").child("player-o-email").val()
 
+                                score_X = snapshot.child("player").child("player-x-score").val()
                                 document.querySelector("#scoreX").innerHTML = snapshot.child("player").child("player-x-score").val() + " / 14"
                                 document.querySelector("#scoreXm").innerHTML = snapshot.child("player").child("player-x-score").val() + " / 14"
                                 document.querySelector("#scoreXs").innerHTML = snapshot.child("player").child("player-x-score").val() + " / 14"
-                                
+
+                                score_O = snapshot.child("player").child("player-o-score").val()
                                 document.querySelector("#scoreO").innerHTML = snapshot.child("player").child("player-o-score").val() + " / 14"
                                 document.querySelector("#scoreOm").innerHTML = snapshot.child("player").child("player-o-score").val() + " / 14"
                                 document.querySelector("#scoreOs").innerHTML = snapshot.child("player").child("player-o-score").val() + " / 14"
                             })
                         })
                     }
+                    break;
+
                 case "game-table":
                     Object.keys(gameInfo[key]).forEach((position) => {
                         switch (position) {
@@ -168,6 +172,7 @@ gameRoomRef.on("value", (snapshot) => {
                                 break;
                         }
                     })
+                    
                     checkResult()
                     break;
 
@@ -180,7 +185,6 @@ function placeXOInDB(location, event) {
     const currentUser = firebase.auth().currentUser;
     playerRef.child(currentUser.uid).child("currentRoom").once("value").then((roomNum) => {
         let playerRoom = roomNum.val()
-
         // console.log(gameInfo[key]);
         gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
 
@@ -216,12 +220,38 @@ function placeXOInDB(location, event) {
 }
 
 
-function removeXOInDB() {
+function removeXOInDB(position) {
+    const currentUser = firebase.auth().currentUser;
+    playerRef.child(currentUser.uid).child("currentRoom").once("value").then((roomNum) => {
+        let playerRoom = roomNum.val()
+        gameRoomRef.child(`room_${playerRoom}`).child("game-table").update({
+            [`${position}`]: "",
+        })
+    })
 
 }
 
-function addScore(){
-    
+function addScoreToDB(score) {
+    const currentUser = firebase.auth().currentUser;
+    playerRef.child(currentUser.uid).child("currentRoom").once("value").then((roomNum) => {
+        let playerRoom = roomNum.val()
+        gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
+            if (turn == "X"){
+                // console.log("aaaaaaaaaa")
+                gameRoomRef.child(`room_${playerRoom}`).child("player").update({
+                    ["player-x-score"]: firebase.database.ServerValue.increment(score),
+                    // ["player-x-score"]: 10,
+                })
+            }
+            if (turn == "O"){
+                // console.log("bbbbbbbbb")
+                gameRoomRef.child(`room_${playerRoom}`).child("player").update({
+                    ["player-o-score"]: firebase.database.ServerValue.increment(score),
+                    // ["player-o-score"]: 10,
+                })
+            }
+        })
+    })
 }
 
 

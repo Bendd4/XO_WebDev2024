@@ -104,7 +104,7 @@ function checkResult() {
     }
 
 
-    console.log(shapeLoc);
+    // console.log(shapeLoc);
     temp.clear();
 
 
@@ -141,7 +141,7 @@ function checkResult() {
                 }
             }
             sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
-            console.log(temp)
+            // 
             temp.clear()
         }
         if (document.getElementById("D3").innerText == turn) {
@@ -173,7 +173,7 @@ function checkResult() {
                 }
             }
             sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
-            console.log(temp)
+            // 
             temp.clear()
         }
     }
@@ -208,7 +208,6 @@ function checkResult() {
             }
         }
         sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
-        console.log(temp)
         temp.clear()
     }
     if (document.getElementById("A1").innerText == turn &&
@@ -242,7 +241,7 @@ function checkResult() {
             }
         }
         sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
-        console.log(temp)
+        
         temp.clear()
     }
 
@@ -278,7 +277,7 @@ function checkResult() {
                 }
             }
             sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
-            console.log(temp)
+            
             temp.clear()
         }
         if (document.getElementById("D0").innerText == turn) {
@@ -310,7 +309,6 @@ function checkResult() {
                 }
             }
             sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
-            // console.log(temp)
             temp.clear()
         }
     }
@@ -345,7 +343,7 @@ function checkResult() {
             }
         }
         sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
-        console.log(temp)
+        
         temp.clear()
     }
     if (document.getElementById("B3").innerText == turn &&
@@ -379,28 +377,30 @@ function checkResult() {
             }
         }
         sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
-        console.log(temp)
+        
         temp.clear()
     }
 
 
-    console.log(sameShapeLoc)
-    // console.log(temp)
-
-    console.log("----------------");
-    console.log("WinX: " + winscore_X);
-    console.log("WinO: " + winscore_O);
-    console.log("loseX: " + losescore_X);
-    console.log("loseO: " + losescore_O);
-    console.log("----------------");
+    // console.log(sameShapeLoc)
+    
+    // console.log("----------------");
+    // console.log("WinX: " + winscore_X);
+    // console.log("WinO: " + winscore_O);
+    // console.log("loseX: " + losescore_X);
+    // console.log("loseO: " + losescore_O);
+    // console.log("----------------");
 
 
     if (turn == "X") {
-        score_X += sameShapeLoc.size;
+        for (let loc of sameShapeLoc) {
+            removeGameToken(loc);
+        }
+        // score_X += sameShapeLoc.size;
         for (let scoreXTextObj of document.querySelectorAll("#scoreX")) {
             // console.log(scoreXTextObj)
             scoreXTextObj.innerText = score_X + " / 14"
-            if ((score_X >= 14)) {
+            if ((score_X >= 14000)) {
                 score_X = 0;
                 score_O = 0;
                 winscore_X += 1;
@@ -409,16 +409,19 @@ function checkResult() {
                 annouceWinner(winner);
                 
             }
+            addScoreToDB(sameShapeLoc.size)
+
         }
+        
+    }
+    else {
+        // score_O += sameShapeLoc.size;
         for (let loc of sameShapeLoc) {
             removeGameToken(loc);
         }
-    }
-    else {
-        score_O += sameShapeLoc.size;
         for (let scoreOTextObj of document.querySelectorAll("#scoreO")) {
             scoreOTextObj.innerText = score_O + " / 14"
-            if ((score_O >= 14)) {
+            if ((score_O >= 14000)) {
                 winner = 'O';
                 annouceWinner(winner);
                 winscore_O += 1;
@@ -426,13 +429,12 @@ function checkResult() {
                 score_X = 0;
                 score_O = 0;
             }
+            addScoreToDB(sameShapeLoc.size)
         }
-        for (let loc of sameShapeLoc) {
-            removeGameToken(loc);
-        }
+        
     }
-    console.log("Score X : " + score_X);
-    console.log("Score O : " + score_O);
+    // console.log("Score X : " + score_X);
+    // console.log("Score O : " + score_O);
 
     let draw = 0;
     for (let block of blocks) {
@@ -443,11 +445,11 @@ function checkResult() {
 
     // console.log(win)
     if (score_X >= 16) {
-        win = true
+        // win = true
         console.log("X won")
     }
     else if(score_O >= 16) {
-        win = true
+        // win = true
         console.log("O won")
     }
 
@@ -499,7 +501,6 @@ function removeGameToken(location) {
         case "0":
             positionID = 'A' + location[1];
             // Insert "Update" value in position to "" here
-            // removeXOTokenDB(location);
             break;
         case "1":
             positionID = 'B' + location[1];
@@ -514,6 +515,7 @@ function removeGameToken(location) {
             break;
     }
     // console.log(positionID);
+    removeXOInDB(positionID);
     document.getElementById(positionID).innerText = '';
 }
 
