@@ -101,6 +101,7 @@ gameRoomRef.on("value", (snapshot) => {
                                     winner = "X"
 
                                     annouceWinner(winner);
+                                    addWinLose(winner);
                                     winscore_O += 1;
                                     losescore_X += 1;
                                     score_X = 0;
@@ -119,6 +120,7 @@ gameRoomRef.on("value", (snapshot) => {
                                     winscore_X += 1;
                                     losescore_O += 1;
                                     annouceWinner(winner);
+                                    addWinLose(winner);
                                     const currentUser = firebase.auth().currentUser;
                                     recordRef.child(currentUser.uid).update({
                                         Totalmatchplay: firebase.database.ServerValue.increment(1),
@@ -286,4 +288,53 @@ function addScoreToDB(score, current_turn) {
     })
 }
 
+function addWinLose(winner) {
+    const currentUser = firebase.auth().currentUser;
+    playerRef.child(currentUser.uid).child("currentRoom").once("value").then((roomNum) => {
+        let playerRoom = roomNum.val()
+        gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
+            // const currentUser = firebase.auth().currentUser;
+            if (winner == "X") {
+                if (snapshot.child("player").child("player-x-email").val() == currentUser.email) {
+                    recordRef.child(currentUser.uid).update({
+                        ["game-win"]: firebase.database.ServerValue.increment(1),
+                    })
+                    console.log("X win");
+                }
+                if (snapshot.child("player").child("player-o-email").val() == currentUser.email) {
+                    recordRef.child(currentUser.uid).update({
+                        ["game-lose"]: firebase.database.ServerValue.increment(1),
+                    })
+                    console.log("O Lose");
+                }
+            }
+            if (winner == "O") {
+                if (snapshot.child("player").child("player-x-email").val() == currentUser.email) {
+                    recordRef.child(currentUser.uid).update({
+                        ["game-lose"]: firebase.database.ServerValue.increment(1),
+                    })
+                    console.log("X lose");
+                }
+                if (snapshot.child("player").child("player-o-email").val() == currentUser.email) {
+                    recordRef.child(currentUser.uid).update({
+                        ["game-win"]: firebase.database.ServerValue.increment(1),
+                    })
+                    console.log("O win");
+                }
+            }
+        })
+    })
+}
 
+function gameEnd() {
+    const currentUser = firebase.auth().currentUser;
+    playerRef.child(currentUser.uid).child("currentRoom").once("value").then((roomNum) => {
+        let playerRoom = roomNum.val()
+        gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
+            gameRoomRef.child(`room_${playerRoom}`).remove();
+            console.log("==============================");
+            console.log("Room", playerRoom, "is Ended");
+            window.location.href='dashboard.html';
+        })
+    })
+}

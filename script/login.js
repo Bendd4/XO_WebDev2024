@@ -5,12 +5,16 @@ loginForm.addEventListener("submit", loginUser);
 
 function loginUser(event) {
     event.preventDefault();
-    const currentUser = firebase.auth().currentUser;
     const username = loginForm["usernameInput"].value;
     const password = loginForm["passwordInput"].value;
 
     firebase.auth().signInWithEmailAndPassword(username, password)
         .then(() => {
+            playerRef.child(user.uid).update({
+                status: "non",
+                currentRoom: '',
+            })
+
             console.log("User Logged-in");
             window.location.href = "dashboard.html";
         })
@@ -23,12 +27,6 @@ function loginUser(event) {
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         console.log("User :", user);
-        playerRef.child(user.uid).update({
-            ["player-email"]: user.email,
-            ["status"]: "non",
-            currentRoom: '',
-        })
-        window.location.href = "dashboard.html";
     } else {
         console.log("Unavailable user");
     }

@@ -493,6 +493,7 @@ function newGame() {
 function annouceWinner(winner) {
     document.getElementById('winnerAnnoucmentDiv').style.left = '-10%'
     document.getElementById('winnerAnnoucmentText').innerHTML = winner + ' WON!'
+
 }
 
 function annouceDraw() {
