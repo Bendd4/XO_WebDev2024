@@ -10,6 +10,7 @@ var score_XShow = document.querySelector('#scoreX')
 var score_O = 0;
 var score_OShow = document.querySelector('#scoreO')
 var blocks = document.querySelectorAll('.table-block');
+const recordRef = firebase.database().ref("PlayerList");
 // var turnObject = document.getElementById('turn');
 
 newGame();
@@ -407,7 +408,10 @@ function checkResult() {
                 losescore_O += 1;
                 winner = 'X';
                 annouceWinner(winner);
-                
+                const currentUser = firebase.auth().currentUser;
+                recordRef.child(currentUser.uid).update({
+                    Totalmatchplay: firebase.database.ServerValue.increment(1),
+                })
             }
             addScoreToDB(sameShapeLoc.size)
 
@@ -428,6 +432,10 @@ function checkResult() {
                 losescore_X += 1;
                 score_X = 0;
                 score_O = 0;
+                const currentUser = firebase.auth().currentUser;
+                recordRef.child(currentUser.uid).update({
+                    Totalmatchplay: firebase.database.ServerValue.increment(1),
+                })
             }
             addScoreToDB(sameShapeLoc.size)
         }
@@ -464,6 +472,10 @@ function checkResult() {
 
 
     } else if (!win && draw == 16) {
+        const currentUser = firebase.auth().currentUser;
+                recordRef.child(currentUser.uid).update({
+                    Totalmatchplay: firebase.database.ServerValue.increment(1),
+                })
         // Game end and no-one wins the game
         // turnObject.innerHTML = "Game draw";
         console.log("Game draw")
@@ -492,6 +504,11 @@ function newGame() {
 function annouceWinner(winner) {
     document.getElementById('winnerAnnoucmentDiv').style.left = '-10%'
     document.getElementById('winnerAnnoucmentText').innerHTML = winner + ' WON!'
+}
+
+function annouceDraw() {
+    document.getElementById('winnerAnnoucmentDiv').style.left = '-10%'
+    document.getElementById('winnerAnnoucmentText').innerHTML = ' DRAW!'
 }
 
 function removeGameToken(location) {
