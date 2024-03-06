@@ -168,14 +168,13 @@ gameRoomRef.on("value", (snapshot) => {
                                     document.querySelector(".xPlayerCards").style.opacity = 0.25
                                     document.querySelector(".oPlayerCards").style.opacity = 1
                                 }
+                                break;
                             default:
                                 break;
                         }
                     })
-                    
-                    checkResult()
+                    // checkResult()
                     break;
-
             }
         })
     })
@@ -196,22 +195,28 @@ function placeXOInDB(location, event) {
 
                 // let current_turn = snapshot.child("game-table").child("turn").val()
 
-                console.log(turn == "O" && userO == currentUser.email)
+                // console.log(turn == "O" && userO == currentUser.email)
 
                 if (turn == "X" && userX == currentUser.email) {
                     gameRoomRef.child(`room_${playerRoom}`).child("game-table").update({
                         [`${location}`]: "X",
-                        ["turn"]: "O"
                     })
                     event.target.innerHTML = "X";
+                    checkResult()
+                    gameRoomRef.child(`room_${playerRoom}`).child("game-table").update({
+                        ["turn"]: "O",
+                    })
                 }
 
                 if (turn == "O" && userO == currentUser.email) {
                     gameRoomRef.child(`room_${playerRoom}`).child("game-table").update({
                         [`${location}`]: "O",
-                        ["turn"]: "X"
                     })
                     event.target.innerHTML = "O";
+                    checkResult()
+                    gameRoomRef.child(`room_${playerRoom}`).child("game-table").update({
+                        ["turn"]: "X",
+                    })
                 }
             }
         })
@@ -231,23 +236,21 @@ function removeXOInDB(position) {
 
 }
 
-function addScoreToDB(score) {
+function addScoreToDB(score, current_turn) {
     const currentUser = firebase.auth().currentUser;
     playerRef.child(currentUser.uid).child("currentRoom").once("value").then((roomNum) => {
         let playerRoom = roomNum.val()
         gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
-            if (turn == "X"){
+            if (current_turn == "X"){
                 // console.log("aaaaaaaaaa")
                 gameRoomRef.child(`room_${playerRoom}`).child("player").update({
                     ["player-x-score"]: firebase.database.ServerValue.increment(score),
-                    // ["player-x-score"]: 10,
                 })
             }
-            if (turn == "O"){
+            if (current_turn == "O"){
                 // console.log("bbbbbbbbb")
                 gameRoomRef.child(`room_${playerRoom}`).child("player").update({
                     ["player-o-score"]: firebase.database.ServerValue.increment(score),
-                    // ["player-o-score"]: 10,
                 })
             }
         })

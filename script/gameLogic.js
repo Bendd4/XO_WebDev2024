@@ -30,11 +30,8 @@ for (var block of blocks) {
             // 4. Modify the code here to check whether the clicking block is avialable.
             // console.log(event.target.innerHTML)
             if (event.target.innerHTML == '') {
-                // event.target.getAttribute("id")
                 placeXOInDB(event.target.getAttribute("id"), event);
                 // event.target.innerHTML = turn;
-                // checkResult();
-                console.log(turn)
             }
         }
     }
@@ -42,7 +39,7 @@ for (var block of blocks) {
 
 function checkResult() {
     // 2. Modify the code here to check whether someone win the game
-    console.log(turn)
+    // console.log(turn)
     let shapeLoc = new Set();
     let sameShapeLoc = new Set();
     let temp = new Set();
@@ -392,6 +389,7 @@ function checkResult() {
     // console.log("loseO: " + losescore_O);
     // console.log("----------------");
 
+    console.log(turn)
 
     if (turn == "X") {
         for (let loc of sameShapeLoc) {
@@ -413,12 +411,10 @@ function checkResult() {
                     Totalmatchplay: firebase.database.ServerValue.increment(1),
                 })
             }
-            addScoreToDB(sameShapeLoc.size)
-
+            addScoreToDB(sameShapeLoc.size, turn)
         }
-        
     }
-    else {
+    if (turn == "O") {
         // score_O += sameShapeLoc.size;
         for (let loc of sameShapeLoc) {
             removeGameToken(loc);
@@ -437,9 +433,8 @@ function checkResult() {
                     Totalmatchplay: firebase.database.ServerValue.increment(1),
                 })
             }
-            addScoreToDB(sameShapeLoc.size)
+            addScoreToDB(sameShapeLoc.size, turn)
         }
-        
     }
     // console.log("Score X : " + score_X);
     // console.log("Score O : " + score_O);
@@ -452,12 +447,12 @@ function checkResult() {
     }
 
     // console.log(win)
-    if (score_X >= 16) {
-        // win = true
+    if (score_X >= 14) {
+        win = true
         console.log("X won")
     }
-    else if(score_O >= 16) {
-        // win = true
+    else if(score_O >= 14) {
+        win = true
         console.log("O won")
     }
 
@@ -465,7 +460,7 @@ function checkResult() {
         //Game end and someone wins the game
         // winner = turn;
         // turnObject.innerHTML = "Game win by " + winner;
-        if (turn = 'O') {
+        if (turn == 'O') {
             // score_O += 1;
             // score_OShow.innerText = score_O + ''
         }
