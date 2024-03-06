@@ -239,7 +239,7 @@ function checkResult() {
             }
         }
         sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
-        
+
         temp.clear()
     }
 
@@ -275,7 +275,7 @@ function checkResult() {
                 }
             }
             sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
-            
+
             temp.clear()
         }
         if (document.getElementById("D0").innerText == turn) {
@@ -341,7 +341,7 @@ function checkResult() {
             }
         }
         sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
-        
+
         temp.clear()
     }
     if (document.getElementById("B3").innerText == turn &&
@@ -375,13 +375,13 @@ function checkResult() {
             }
         }
         sameShapeLoc = new Set([...sameShapeLoc, ...temp]);
-        
+
         temp.clear()
     }
 
 
     // console.log(sameShapeLoc)
-    
+
     // console.log("----------------");
     // console.log("WinX: " + winscore_X);
     // console.log("WinO: " + winscore_O);
@@ -399,18 +399,10 @@ function checkResult() {
         for (let scoreXTextObj of document.querySelectorAll("#scoreX")) {
             // console.log(scoreXTextObj)
             scoreXTextObj.innerText = score_X + " / 14"
-            if ((score_X >= 14000)) {
-                score_X = 0;
-                score_O = 0;
-                winscore_X += 1;
-                losescore_O += 1;
-                winner = 'X';
-                annouceWinner(winner);
-                const currentUser = firebase.auth().currentUser;
-                recordRef.child(currentUser.uid).update({
-                    Totalmatchplay: firebase.database.ServerValue.increment(1),
-                })
-            }
+            // if (score_X >= 14) {
+            //     winner = 'X';
+            //     win = true
+            // }
             addScoreToDB(sameShapeLoc.size, turn)
         }
     }
@@ -421,18 +413,10 @@ function checkResult() {
         }
         for (let scoreOTextObj of document.querySelectorAll("#scoreO")) {
             scoreOTextObj.innerText = score_O + " / 14"
-            if ((score_O >= 14000)) {
-                winner = 'O';
-                annouceWinner(winner);
-                winscore_O += 1;
-                losescore_X += 1;
-                score_X = 0;
-                score_O = 0;
-                const currentUser = firebase.auth().currentUser;
-                recordRef.child(currentUser.uid).update({
-                    Totalmatchplay: firebase.database.ServerValue.increment(1),
-                })
-            }
+            // if (score_O >= 14) {
+            //     winner = 'O';
+            //     win = true
+            // }
             addScoreToDB(sameShapeLoc.size, turn)
         }
     }
@@ -447,30 +431,40 @@ function checkResult() {
     }
 
     // console.log(win)
-    if (score_X >= 14) {
-        win = true
-        console.log("X won")
-    }
-    else if(score_O >= 14) {
-        win = true
-        console.log("O won")
-    }
 
     if (win) {
         //Game end and someone wins the game
         // winner = turn;
         // turnObject.innerHTML = "Game win by " + winner;
-        if (turn == 'O') {
-            // score_O += 1;
-            // score_OShow.innerText = score_O + ''
-        }
-
+        console.log("aaaaaaaa")
+        // if (turn == 'O') {
+        //     annouceWinner(winner);
+        //     winscore_O += 1;
+        //     losescore_X += 1;
+        //     score_X = 0;
+        //     score_O = 0;
+        //     const currentUser = firebase.auth().currentUser;
+        //     recordRef.child(currentUser.uid).update({
+        //         Totalmatchplay: firebase.database.ServerValue.increment(1),
+        //     })
+        // }
+        // if (turn == 'X') {
+        //     score_X = 0;
+        //     score_O = 0;
+        //     winscore_X += 1;
+        //     losescore_O += 1;
+        //     annouceWinner(winner);
+        //     const currentUser = firebase.auth().currentUser;
+        //     recordRef.child(currentUser.uid).update({
+        //         Totalmatchplay: firebase.database.ServerValue.increment(1),
+        //     })
+        // }
 
     } else if (!win && draw == 16) {
         const currentUser = firebase.auth().currentUser;
-                recordRef.child(currentUser.uid).update({
-                    Totalmatchplay: firebase.database.ServerValue.increment(1),
-                })
+        recordRef.child(currentUser.uid).update({
+            Totalmatchplay: firebase.database.ServerValue.increment(1),
+        })
         // Game end and no-one wins the game
         // turnObject.innerHTML = "Game draw";
         console.log("Game draw")

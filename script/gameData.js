@@ -95,6 +95,35 @@ gameRoomRef.on("value", (snapshot) => {
                                 document.querySelector("#scoreO").innerHTML = snapshot.child("player").child("player-o-score").val() + " / 14"
                                 document.querySelector("#scoreOm").innerHTML = snapshot.child("player").child("player-o-score").val() + " / 14"
                                 document.querySelector("#scoreOs").innerHTML = snapshot.child("player").child("player-o-score").val() + " / 14"
+
+                                if (score_X >= 14) {
+                                    win = true;
+                                    winner = "X"
+
+                                    annouceWinner(winner);
+                                    winscore_O += 1;
+                                    losescore_X += 1;
+                                    score_X = 0;
+                                    score_O = 0;
+                                    const currentUser = firebase.auth().currentUser;
+                                    recordRef.child(currentUser.uid).update({
+                                        Totalmatchplay: firebase.database.ServerValue.increment(1),
+                                    })
+                                }
+                                if (score_O >= 14) {
+                                    win = true;
+                                    winner = "O"
+
+                                    score_X = 0;
+                                    score_O = 0;
+                                    winscore_X += 1;
+                                    losescore_O += 1;
+                                    annouceWinner(winner);
+                                    const currentUser = firebase.auth().currentUser;
+                                    recordRef.child(currentUser.uid).update({
+                                        Totalmatchplay: firebase.database.ServerValue.increment(1),
+                                    })
+                                }
                             })
                         })
                     }
@@ -241,13 +270,13 @@ function addScoreToDB(score, current_turn) {
     playerRef.child(currentUser.uid).child("currentRoom").once("value").then((roomNum) => {
         let playerRoom = roomNum.val()
         gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
-            if (current_turn == "X"){
+            if (current_turn == "X") {
                 // console.log("aaaaaaaaaa")
                 gameRoomRef.child(`room_${playerRoom}`).child("player").update({
                     ["player-x-score"]: firebase.database.ServerValue.increment(score),
                 })
             }
-            if (current_turn == "O"){
+            if (current_turn == "O") {
                 // console.log("bbbbbbbbb")
                 gameRoomRef.child(`room_${playerRoom}`).child("player").update({
                     ["player-o-score"]: firebase.database.ServerValue.increment(score),
