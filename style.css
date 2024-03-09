@@ -40,6 +40,7 @@ a:hover{
 #playerDetailExpanded{
   position: absolute !important;
   height: 500px;
+  left: 0;
   top:-600px;
   transition: 0.5s;
 }

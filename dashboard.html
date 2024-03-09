@@ -33,14 +33,9 @@
   <div class="container h-100" id="dashboardLarge">
     <div class="row my-5" style="height: 85% !important;">
       <div class="col-7 h-100">
-        <div id="welcomeMessage" class="text-start h2 pt-2 my-4" style="height: 10% !important;">
+        <div id="welcomeMessage" class="text-start h2 pt-5 my-4" style="height: 15% !important;">
           Welcome back, ${USERNAME} !
         </div>
-        <a href="gameBoard.html">
-          <div class="h-25 h2 pt-5 dashboardButton">
-            FIND MATCH
-          </div>
-        </a>
         <div class="h-25 row h3 mx-0 my-4">
           <div class="col h-25 dashboardButton pt-5 me-3" id="join-lobby" onclick="openRoomInput()" style="height: 100% !important;"
             >
@@ -50,6 +45,11 @@
             CREATE
           </div>
         </div>
+        <a href="leaderboard.html">
+          <div class="h-25 h5 pt-4 dashboardButton" style="height: 15% !important;">
+            LEADERBOARD
+          </div>
+        </a>
         <a href="tutorial.html">
           <div class="h-25 h5 pt-3 dashboardButton my-4" style="height: 10% !important;">
             HOW TO PLAY
@@ -71,15 +71,13 @@
               <hr style="border-top: 2px solid rgb(255, 255, 255);">
           </div>
           <div>
-            <p class="text-end h4" id="TotalMatchPlay">Total Match Played : XXX</p>
-            <p class="text-end h4">Match Won : XXX</p>
-            <p class="text-end h4">Match Lost : XXX</p>
-            <p class="text-end h4">Winrate: X.XX</p>
-            <p class="text-end h4">Highest Win Streak : XXX</p>
-            <p class="text-end h4">Current Win Streak : XXX</p>
-            <hr style="border-top: 2px solid rgb(255, 255, 255);">
-            <a href="leaderboard.html"><div class="h4 dashboardButton mt-4 p-3">Leaderboard</div></a>
-            
+            <p class="text-end h4" >Total Match Played : <span id="TotalMatchPlay"></span></p>
+            <p class="text-end h4" >Match Won : <span id="MatchWon"></span></p>
+            <p class="text-end h4" >Match Lost : <span id="MatchLost"></span></p>
+            <p class="text-end h4" >Winrate: <span id="WinRate"></span></p>
+            <p class="text-end h4" id="HighestStreak">Highest Win Streak : XXX</p>
+            <p class="text-end h4" id="CurrentStreak">Current Win Streak : XXX</p>
+            <hr style="border-top: 2px solid rgb(255, 255, 255);">    
           </div>
         </div>
       </div>
@@ -96,17 +94,17 @@
             <img src="image/defaultPfp.png" class="profilePicture" id="profilePictureIconSmall">
           </div>
         </a>
-        <a href="gameBoard.html">
-          <div class="pt-4 pb-4 dashboardButton mb-4">
-            FIND MATCH
-          </div>
-        </a>
         <div class="pt-4 pb-4 dashboardButton mb-4" onclick="openRoomInput()">
           JOIN
         </div>
         <div class="pt-4 pb-4 dashboardButton mb-4" id="create-lobby-small">
           CREATE
         </div>
+        <a href="leaderboard.html">
+          <div class="pt-4 pb-4 dashboardButton mb-4">
+            LEADERBOARD
+          </div>
+        </a>
         <a href="tutorial.html">
           <div class="pt-4 pb-4 dashboardButton mb-4">
             HOW TO PLAY
@@ -121,13 +119,12 @@
 
       <div class="container p-5 w-100" style="background-color: rgb(20, 20, 20);" id="playerDetailExpanded">
         <p class="text-start h1 fw-bold mb-5" id="dashboardNameSmall">${USERNAME}</p>
-        <p class="text-end h4">Total Match Played : XXX</p>
-        <p class="text-end h4">Match Won : XXX</p>
-        <p class="text-end h4">Match Lost : XXX</p>
-        <p class="text-end h4">Winrate: X.XX</p>
-        <p class="text-end h4">Highest Win Streak : XXX</p>
-        <p class="text-end h4">Current Win Streak : XXX</p>
-        <div class="h6 dashboardButton mt-4 p-3"><a href="leaderboard.html">Leaderboard</a></div>
+        <p class="text-end h4">Total Match Played : <span id="TotalMatchPlays">XXX</span></p>
+        <p class="text-end h4" >Match Won : <span id="MatchWons"></span></p>
+        <p class="text-end h4" >Match Lost : <span id="MatchLosts"></span></p>
+        <p class="text-end h4" >Winrate: <span id="WinRates"></span></p>
+        <p class="text-end h4" id="HighestStreaks">Highest Win Streak : XXX</p>
+        <p class="text-end h4" id="CurrentStreaks">Current Win Streak : XXX</p>
         <div class="mt-4 h1"><a onclick="closePlayerDetail()"><i class="bi bi-x-circle"></i></a></div>
 
       </div>

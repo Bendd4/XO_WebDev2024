@@ -39,6 +39,7 @@ function createUser(event) {
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         console.log("User :", user);
+        window.location.href = "dashboard.html";
     } else {
         console.log("Unavailable user");
     }
