@@ -102,8 +102,6 @@ gameRoomRef.on("value", (snapshot) => {
 
                                     annouceWinner(winner);
                                     addWinLose(winner);
-                                    winscore_O += 1;
-                                    losescore_X += 1;
                                     score_X = 0;
                                     score_O = 0;
                                     const currentUser = firebase.auth().currentUser;
@@ -117,11 +115,38 @@ gameRoomRef.on("value", (snapshot) => {
 
                                     score_X = 0;
                                     score_O = 0;
-                                    winscore_X += 1;
-                                    losescore_O += 1;
                                     annouceWinner(winner);
                                     addWinLose(winner);
                                     const currentUser = firebase.auth().currentUser;
+                                    recordRef.child(currentUser.uid).update({
+                                        Totalmatchplay: firebase.database.ServerValue.increment(1),
+                                    })
+                                }
+
+                                if (score_X < 14 && score_O < 14 && turn == "") {
+                                    if (score_X < score_O) {
+                                        win = true;
+                                        winner = "O"
+
+                                        score_X = 0;
+                                        score_O = 0;
+                                        annouceWinner(winner);
+                                        addWinLose(winner);
+                                    }
+                                    else {
+                                        if (score_X > score_O) {
+                                            win = true;
+                                            winner = "X"
+
+                                            score_X = 0;
+                                            score_O = 0;
+                                            annouceWinner(winner);
+                                            addWinLose(winner);
+                                        } else {
+                                            annouceDraw();
+                                        }
+                                    }
+                                    
                                     recordRef.child(currentUser.uid).update({
                                         Totalmatchplay: firebase.database.ServerValue.increment(1),
                                     })
@@ -334,7 +359,24 @@ function gameEnd() {
             gameRoomRef.child(`room_${playerRoom}`).remove();
             console.log("==============================");
             console.log("Room", playerRoom, "is Ended");
-            window.location.href='dashboard.html';
+            window.location.href = 'dashboard.html';
+        })
+    })
+}
+
+function setDraw() {
+    const currentUser = firebase.auth().currentUser;
+    playerRef.child(currentUser.uid).child("currentRoom").once("value").then((roomNum) => {
+        let playerRoom = roomNum.val()
+        gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
+        //     snapshot.child("game-table").child("turn").update({
+        //         ["turn"]: ""
+        //     })
+            gameRoomRef.child(`room_${playerRoom}`).child("game-table").update({
+                ["turn"]: "",
+            })
+            
+            
         })
     })
 }

@@ -2,10 +2,10 @@ var turn = 'X'
 var win = false;
 var winner = '';
 var score_X = 0;
-var winscore_X = 0;
-var winscore_O = 0;
-var losescore_X = 0;
-var losescore_O = 0;
+// var winscore_X = 0;
+// var winscore_O = 0;
+// var losescore_X = 0;
+// var losescore_O = 0;
 var score_XShow = document.querySelector('#scoreX')
 var score_O = 0;
 var score_OShow = document.querySelector('#scoreO')
@@ -433,40 +433,18 @@ function checkResult() {
     // console.log(win)
 
     if (win) {
-        //Game end and someone wins the game
-        // winner = turn;
-        // turnObject.innerHTML = "Game win by " + winner;
         console.log("aaaaaaaa")
-        // if (turn == 'O') {
-        //     annouceWinner(winner);
-        //     winscore_O += 1;
-        //     losescore_X += 1;
-        //     score_X = 0;
-        //     score_O = 0;
-        //     const currentUser = firebase.auth().currentUser;
-        //     recordRef.child(currentUser.uid).update({
-        //         Totalmatchplay: firebase.database.ServerValue.increment(1),
-        //     })
-        // }
-        // if (turn == 'X') {
-        //     score_X = 0;
-        //     score_O = 0;
-        //     winscore_X += 1;
-        //     losescore_O += 1;
-        //     annouceWinner(winner);
-        //     const currentUser = firebase.auth().currentUser;
-        //     recordRef.child(currentUser.uid).update({
-        //         Totalmatchplay: firebase.database.ServerValue.increment(1),
-        //     })
-        // }
 
     } else if (!win && draw == 16) {
-        const currentUser = firebase.auth().currentUser;
-        recordRef.child(currentUser.uid).update({
-            Totalmatchplay: firebase.database.ServerValue.increment(1),
-        })
+        // const currentUser = firebase.auth().currentUser;
+        // recordRef.child(currentUser.uid).update({
+        //     Totalmatchplay: firebase.database.ServerValue.increment(1),
+        // })
+
+        // annouceDraw();
         // Game end and no-one wins the game
         // turnObject.innerHTML = "Game draw";
+        setDraw();
         console.log("Game draw")
     } else {
         // The game is on going
