@@ -10,10 +10,14 @@ function loginUser(event) {
 
     firebase.auth().signInWithEmailAndPassword(username, password)
         .then(() => {
-            playerRef.child(user.uid).update({
-                status: "non",
-                currentRoom: '',
+        const currentUser = firebase.auth().currentUser;
+       
+            playerRef.child(currentUser.uid).update({
+                ["player-email"]: currentUser.email,
+                ["status"]: "non",
             })
+        
+            
 
             console.log("User Logged-in");
             window.location.href = "dashboard.html";
