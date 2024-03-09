@@ -100,14 +100,14 @@ gameRoomRef.on("value", (snapshot) => {
                                     win = true;
                                     winner = "X"
 
-                                    annouceWinner(winner);
-                                    addWinLose(winner);
                                     score_X = 0;
                                     score_O = 0;
-                                    const currentUser = firebase.auth().currentUser;
-                                    recordRef.child(currentUser.uid).update({
-                                        Totalmatchplay: firebase.database.ServerValue.increment(1),
-                                    })
+                                    annouceWinner(winner);
+                                    addWinLose(winner);
+                                    // const currentUser = firebase.auth().currentUser;
+                                    // recordRef.child(currentUser.uid).update({
+                                    //     Totalmatchplay: firebase.database.ServerValue.increment(1),
+                                    // })
                                 }
                                 if (score_O >= 14) {
                                     win = true;
@@ -117,10 +117,10 @@ gameRoomRef.on("value", (snapshot) => {
                                     score_O = 0;
                                     annouceWinner(winner);
                                     addWinLose(winner);
-                                    const currentUser = firebase.auth().currentUser;
-                                    recordRef.child(currentUser.uid).update({
-                                        Totalmatchplay: firebase.database.ServerValue.increment(1),
-                                    })
+                                    // const currentUser = firebase.auth().currentUser;
+                                    // recordRef.child(currentUser.uid).update({
+                                    //     Totalmatchplay: firebase.database.ServerValue.increment(1),
+                                    // })
                                 }
 
                                 if (score_X < 14 && score_O < 14 && turn == "") {
@@ -143,13 +143,19 @@ gameRoomRef.on("value", (snapshot) => {
                                             annouceWinner(winner);
                                             addWinLose(winner);
                                         } else {
+                                            win = true;
+                                            winner = "Non"
+
+                                            score_X = 0;
+                                            score_O = 0;
                                             annouceDraw();
+                                            addWinLose(winner);
+                                            setDraw();
                                         }
                                     }
-                                    
-                                    recordRef.child(currentUser.uid).update({
-                                        Totalmatchplay: firebase.database.ServerValue.increment(1),
-                                    })
+                                    // recordRef.child(currentUser.uid).update({
+                                    //     Totalmatchplay: firebase.database.ServerValue.increment(1),
+                                    // })
                                 }
                             })
                         })
@@ -323,12 +329,14 @@ function addWinLose(winner) {
                 if (snapshot.child("player").child("player-x-email").val() == currentUser.email) {
                     recordRef.child(currentUser.uid).update({
                         ["game-win"]: firebase.database.ServerValue.increment(1),
+                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(1),
                     })
                     console.log("X win");
                 }
                 if (snapshot.child("player").child("player-o-email").val() == currentUser.email) {
                     recordRef.child(currentUser.uid).update({
                         ["game-lose"]: firebase.database.ServerValue.increment(1),
+                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(1),
                     })
                     console.log("O Lose");
                 }
@@ -337,16 +345,31 @@ function addWinLose(winner) {
                 if (snapshot.child("player").child("player-x-email").val() == currentUser.email) {
                     recordRef.child(currentUser.uid).update({
                         ["game-lose"]: firebase.database.ServerValue.increment(1),
+                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(1),
                     })
                     console.log("X lose");
                 }
                 if (snapshot.child("player").child("player-o-email").val() == currentUser.email) {
                     recordRef.child(currentUser.uid).update({
                         ["game-win"]: firebase.database.ServerValue.increment(1),
+                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(1),
                     })
                     console.log("O win");
                 }
             }
+            if (winner == "Non") {
+                if (snapshot.child("player").child("player-x-email").val() == currentUser.email) {
+                    recordRef.child(currentUser.uid).update({
+                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(1),
+                    })
+                }
+                if (snapshot.child("player").child("player-o-email").val() == currentUser.email) {
+                    recordRef.child(currentUser.uid).update({
+                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(1),
+                    })
+                }
+            }
+            winner = ""
         })
     })
 }
@@ -369,9 +392,6 @@ function setDraw() {
     playerRef.child(currentUser.uid).child("currentRoom").once("value").then((roomNum) => {
         let playerRoom = roomNum.val()
         gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
-        //     snapshot.child("game-table").child("turn").update({
-        //         ["turn"]: ""
-        //     })
             gameRoomRef.child(`room_${playerRoom}`).child("game-table").update({
                 ["turn"]: "",
             })

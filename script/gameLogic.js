@@ -433,7 +433,6 @@ function checkResult() {
     // console.log(win)
 
     if (win) {
-        console.log("aaaaaaaa")
 
     } else if (!win && draw == 16) {
         // const currentUser = firebase.auth().currentUser;
