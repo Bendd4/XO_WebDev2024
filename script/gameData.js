@@ -105,59 +105,60 @@ gameRoomRef.on("value", (snapshot) => {
                                     annouceWinner(winner);
                                     addWinLose(winner);
                                     // gameEnd()
-                                } else {
-                                    if (score_O >= 14) {
-                                        win = true;
-                                        winner = "O"
-
-                                        score_X = 0;
-                                        score_O = 0;
-                                        annouceWinner(winner);
-                                        addWinLose(winner);
-                                        // gameEnd()
-                                    }
-                                    else {
-                                        if (score_X < 14 && score_O < 14 && turn == "") {
-                                            if (score_X < score_O) {
-                                                win = true;
-                                                winner = "O"
-
-                                                score_X = 0;
-                                                score_O = 0;
-                                                annouceWinner(winner);
-                                                addWinLose(winner);
-                                                // gameEnd()
-                                            }
-                                            else {
-                                                if (score_X > score_O) {
-                                                    win = true;
-                                                    winner = "X"
-
-                                                    score_X = 0;
-                                                    score_O = 0;
-                                                    annouceWinner(winner);
-                                                    addWinLose(winner);
-                                                    // gameEnd()
-                                                } else {
-                                                    win = true;
-                                                    winner = "Non"
-
-                                                    score_X = 0;
-                                                    score_O = 0;
-                                                    annouceDraw();
-                                                    addWinLose(winner);
-                                                    setDraw();
-                                                    // gameEnd()
-                                                }
-                                            }
-                                        }
-                                    }
-
-
-                                    // recordRef.child(currentUser.uid).update({
-                                    //     Totalmatchplay: firebase.database.ServerValue.increment(-1),
-                                    // })
                                 }
+                                if (score_O >= 14) {
+                                    win = true;
+                                    winner = "O"
+
+                                    score_X = 0;
+                                    score_O = 0;
+                                    annouceWinner(winner);
+                                    addWinLose(winner);
+                                    // gameEnd()
+                                }
+                                else {
+                                    if (score_X < 14 && score_O < 14 && turn == "") {
+                                        if (score_X < score_O) {
+                                            win = true;
+                                            winner = "O"
+
+                                            score_X = 0;
+                                            score_O = 0;
+                                            annouceWinner(winner);
+                                            addWinLose(winner);
+                                            // gameEnd()
+                                        }
+
+                                        if (score_X > score_O) {
+                                            win = true;
+                                            winner = "X"
+
+                                            score_X = 0;
+                                            score_O = 0;
+                                            annouceWinner(winner);
+                                            addWinLose(winner);
+                                            // gameEnd()
+                                        }
+                                        else {
+                                            win = true;
+                                            winner = "Non"
+
+                                            score_X = 0;
+                                            score_O = 0;
+                                            annouceDraw();
+                                            addWinLose(winner);
+                                            setDraw();
+                                            // gameEnd()
+                                        }
+
+                                    }
+                                }
+
+
+                                // recordRef.child(currentUser.uid).update({
+                                //     Totalmatchplay: firebase.database.ServerValue.increment(-1),
+                                // })
+
                             })
                         })
                     }
@@ -326,6 +327,8 @@ function addWinLose(winner) {
         let playerRoom = roomNum.val()
         gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
             // const currentUser = firebase.auth().currentUser;
+            console.log("=======================================================================");
+            console.log(snapshot + " or what ever this bug is");
             if (winner == "X") {
                 if (snapshot.child("player").child("player-x-email").val() == currentUser.email) {
                     recordRef.child(currentUser.uid).update({
@@ -333,6 +336,7 @@ function addWinLose(winner) {
                         ["Totalmatchplay"]: firebase.database.ServerValue.increment(-1),
                     })
                     console.log("X win");
+                    return;
                 }
                 if (snapshot.child("player").child("player-o-email").val() == currentUser.email) {
                     recordRef.child(currentUser.uid).update({
@@ -340,6 +344,7 @@ function addWinLose(winner) {
                         ["Totalmatchplay"]: firebase.database.ServerValue.increment(-1),
                     })
                     console.log("O Lose");
+                    return;
                 }
             }
             if (winner == "O") {
@@ -349,6 +354,7 @@ function addWinLose(winner) {
                         ["Totalmatchplay"]: firebase.database.ServerValue.increment(-1),
                     })
                     console.log("X lose");
+                    return;
                 }
                 if (snapshot.child("player").child("player-o-email").val() == currentUser.email) {
                     recordRef.child(currentUser.uid).update({
@@ -356,6 +362,7 @@ function addWinLose(winner) {
                         ["Totalmatchplay"]: firebase.database.ServerValue.increment(-1),
                     })
                     console.log("O win");
+                    return;
                 }
             }
             if (winner == "Non") {
@@ -363,11 +370,13 @@ function addWinLose(winner) {
                     recordRef.child(currentUser.uid).update({
                         ["Totalmatchplay"]: firebase.database.ServerValue.increment(-1),
                     })
+                    return;
                 }
                 if (snapshot.child("player").child("player-o-email").val() == currentUser.email) {
                     recordRef.child(currentUser.uid).update({
                         ["Totalmatchplay"]: firebase.database.ServerValue.increment(-1),
                     })
+                    return;
                 }
             }
             winner = ""
