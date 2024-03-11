@@ -103,8 +103,8 @@ gameRoomRef.on("value", (snapshot) => {
                                     score_X = 0;
                                     score_O = 0;
                                     annouceWinner(winner);
-                                    addWinLose(winner);
-                                    // gameEnd()
+                                    // addWinLose(winner);
+                                    gameEnd()
                                 }
                                 if (score_O >= 14) {
                                     win = true;
@@ -113,11 +113,11 @@ gameRoomRef.on("value", (snapshot) => {
                                     score_X = 0;
                                     score_O = 0;
                                     annouceWinner(winner);
-                                    addWinLose(winner);
-                                    // gameEnd()
+                                    // addWinLose(winner);
+                                    gameEnd()
                                 }
                                 else {
-                                    if (score_X < 14 && score_O < 14 && turn == "") {
+                                    if (score_X < 14 && score_O < 14 && turn == "draw") {
                                         if (score_X < score_O) {
                                             win = true;
                                             winner = "O"
@@ -125,8 +125,8 @@ gameRoomRef.on("value", (snapshot) => {
                                             score_X = 0;
                                             score_O = 0;
                                             annouceWinner(winner);
-                                            addWinLose(winner);
-                                            // gameEnd()
+                                            // addWinLose(winner);
+                                            gameEnd()
                                         }
 
                                         if (score_X > score_O) {
@@ -136,19 +136,19 @@ gameRoomRef.on("value", (snapshot) => {
                                             score_X = 0;
                                             score_O = 0;
                                             annouceWinner(winner);
-                                            addWinLose(winner);
-                                            // gameEnd()
+                                            // addWinLose(winner);
+                                            gameEnd()
                                         }
-                                        else {
+                                        if (score_X == score_O) {
                                             win = true;
                                             winner = "Non"
 
                                             score_X = 0;
                                             score_O = 0;
                                             annouceDraw();
-                                            addWinLose(winner);
+                                            // addWinLose(winner);
                                             setDraw();
-                                            // gameEnd()
+                                            gameEnd()
                                         }
 
                                     }
@@ -325,6 +325,8 @@ function addWinLose(winner) {
     const currentUser = firebase.auth().currentUser;
     playerRef.child(currentUser.uid).child("currentRoom").once("value").then((roomNum) => {
         let playerRoom = roomNum.val()
+        console.log("=======================================================================");
+        console.log("PlayerRef Test to check or what ever this bug is");
         gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
             // const currentUser = firebase.auth().currentUser;
             console.log("=======================================================================");
@@ -390,10 +392,14 @@ function gameEnd() {
     playerRef.child(currentUser.uid).child("currentRoom").once("value").then((roomNum) => {
         let playerRoom = roomNum.val()
         gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
-            gameRoomRef.child(`room_${playerRoom}`).remove();
-            console.log("==============================");
-            console.log("Room", playerRoom, "is Ended");
-            window.location.href = 'dashboard.html';
+            addWinLose(winner);
+            setTimeout(function () {
+                gameRoomRef.child(`room_${playerRoom}`).remove();
+                console.log("==============================");
+                console.log("Room", playerRoom, "is Ended");
+            }
+                , 500);
+            // window.location.href = 'dashboard.html';
         })
     })
 }
@@ -404,7 +410,7 @@ function setDraw() {
         let playerRoom = roomNum.val()
         gameRoomRef.child(`room_${playerRoom}`).once("value").then((snapshot) => {
             gameRoomRef.child(`room_${playerRoom}`).child("game-table").update({
-                ["turn"]: "",
+                ["turn"]: "draw",
             })
 
 
