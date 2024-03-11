@@ -104,27 +104,9 @@ gameRoomRef.on("value", (snapshot) => {
                                     score_O = 0;
                                     annouceWinner(winner);
                                     addWinLose(winner);
-                                    // const currentUser = firebase.auth().currentUser;
-                                    // recordRef.child(currentUser.uid).update({
-                                    //     Totalmatchplay: firebase.database.ServerValue.increment(-1),
-                                    // })
-                                }
-                                if (score_O >= 14) {
-                                    win = true;
-                                    winner = "O"
-
-                                    score_X = 0;
-                                    score_O = 0;
-                                    annouceWinner(winner);
-                                    addWinLose(winner);
-                                    // const currentUser = firebase.auth().currentUser;
-                                    // recordRef.child(currentUser.uid).update({
-                                    //     Totalmatchplay: firebase.database.ServerValue.increment(-1),
-                                    // })
-                                }
-
-                                if (score_X < 14 && score_O < 14 && turn == "") {
-                                    if (score_X < score_O) {
+                                    // gameEnd()
+                                } else {
+                                    if (score_O >= 14) {
                                         win = true;
                                         winner = "O"
 
@@ -132,27 +114,46 @@ gameRoomRef.on("value", (snapshot) => {
                                         score_O = 0;
                                         annouceWinner(winner);
                                         addWinLose(winner);
+                                        // gameEnd()
                                     }
                                     else {
-                                        if (score_X > score_O) {
-                                            win = true;
-                                            winner = "X"
+                                        if (score_X < 14 && score_O < 14 && turn == "") {
+                                            if (score_X < score_O) {
+                                                win = true;
+                                                winner = "O"
 
-                                            score_X = 0;
-                                            score_O = 0;
-                                            annouceWinner(winner);
-                                            addWinLose(winner);
-                                        } else {
-                                            win = true;
-                                            winner = "Non"
+                                                score_X = 0;
+                                                score_O = 0;
+                                                annouceWinner(winner);
+                                                addWinLose(winner);
+                                                // gameEnd()
+                                            }
+                                            else {
+                                                if (score_X > score_O) {
+                                                    win = true;
+                                                    winner = "X"
 
-                                            score_X = 0;
-                                            score_O = 0;
-                                            annouceDraw();
-                                            addWinLose(winner);
-                                            setDraw();
+                                                    score_X = 0;
+                                                    score_O = 0;
+                                                    annouceWinner(winner);
+                                                    addWinLose(winner);
+                                                    // gameEnd()
+                                                } else {
+                                                    win = true;
+                                                    winner = "Non"
+
+                                                    score_X = 0;
+                                                    score_O = 0;
+                                                    annouceDraw();
+                                                    addWinLose(winner);
+                                                    setDraw();
+                                                    // gameEnd()
+                                                }
+                                            }
                                         }
                                     }
+
+
                                     // recordRef.child(currentUser.uid).update({
                                     //     Totalmatchplay: firebase.database.ServerValue.increment(-1),
                                     // })
@@ -370,6 +371,7 @@ function addWinLose(winner) {
                 }
             }
             winner = ""
+            // gameEnd();
         })
     })
 }
@@ -395,8 +397,8 @@ function setDraw() {
             gameRoomRef.child(`room_${playerRoom}`).child("game-table").update({
                 ["turn"]: "",
             })
-            
-            
+
+
         })
     })
 }

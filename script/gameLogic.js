@@ -380,7 +380,7 @@ function checkResult() {
     }
 
 
-    console.log(turn)
+    // console.log(turn)
 
     if (turn == "X") {
         for (let loc of sameShapeLoc) {
@@ -420,9 +420,9 @@ function checkResult() {
 
     if (!win && draw == 16) {
         setDraw();
-        console.log("Game draw")
+        // console.log("Game draw")
     }
-    console.log("------------------Finished Checking------------------")
+    // console.log("------------------Finished Checking------------------")
 }
 
 function newGame() {
