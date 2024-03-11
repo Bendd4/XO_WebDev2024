@@ -380,29 +380,14 @@ function checkResult() {
     }
 
 
-    // console.log(sameShapeLoc)
-
-    // console.log("----------------");
-    // console.log("WinX: " + winscore_X);
-    // console.log("WinO: " + winscore_O);
-    // console.log("loseX: " + losescore_X);
-    // console.log("loseO: " + losescore_O);
-    // console.log("----------------");
-
     console.log(turn)
 
     if (turn == "X") {
         for (let loc of sameShapeLoc) {
             removeGameToken(loc);
         }
-        // score_X += sameShapeLoc.size;
         for (let scoreXTextObj of document.querySelectorAll("#scoreX")) {
-            // console.log(scoreXTextObj)
             scoreXTextObj.innerText = score_X + " / 14"
-            // if (score_X >= 14) {
-            //     winner = 'X';
-            //     win = true
-            // }
             addScoreToDB(sameShapeLoc.size, turn)
         }
     }
@@ -432,23 +417,10 @@ function checkResult() {
 
     // console.log(win)
 
-    if (win) {
 
-    } else if (!win && draw == 16) {
-        // const currentUser = firebase.auth().currentUser;
-        // recordRef.child(currentUser.uid).update({
-        //     Totalmatchplay: firebase.database.ServerValue.increment(1),
-        // })
-
-        // annouceDraw();
-        // Game end and no-one wins the game
-        // turnObject.innerHTML = "Game draw";
+    if (!win && draw == 16) {
         setDraw();
         console.log("Game draw")
-    } else {
-        // The game is on going
-        // turn = turn === 'O' ? 'X' : 'O';
-        // turnObject.innerHTML = "Turn: " + turn;
     }
     console.log("------------------Finished Checking------------------")
 }

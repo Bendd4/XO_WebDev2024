@@ -106,7 +106,7 @@ gameRoomRef.on("value", (snapshot) => {
                                     addWinLose(winner);
                                     // const currentUser = firebase.auth().currentUser;
                                     // recordRef.child(currentUser.uid).update({
-                                    //     Totalmatchplay: firebase.database.ServerValue.increment(1),
+                                    //     Totalmatchplay: firebase.database.ServerValue.increment(-1),
                                     // })
                                 }
                                 if (score_O >= 14) {
@@ -119,7 +119,7 @@ gameRoomRef.on("value", (snapshot) => {
                                     addWinLose(winner);
                                     // const currentUser = firebase.auth().currentUser;
                                     // recordRef.child(currentUser.uid).update({
-                                    //     Totalmatchplay: firebase.database.ServerValue.increment(1),
+                                    //     Totalmatchplay: firebase.database.ServerValue.increment(-1),
                                     // })
                                 }
 
@@ -154,7 +154,7 @@ gameRoomRef.on("value", (snapshot) => {
                                         }
                                     }
                                     // recordRef.child(currentUser.uid).update({
-                                    //     Totalmatchplay: firebase.database.ServerValue.increment(1),
+                                    //     Totalmatchplay: firebase.database.ServerValue.increment(-1),
                                     // })
                                 }
                             })
@@ -328,15 +328,15 @@ function addWinLose(winner) {
             if (winner == "X") {
                 if (snapshot.child("player").child("player-x-email").val() == currentUser.email) {
                     recordRef.child(currentUser.uid).update({
-                        ["game-win"]: firebase.database.ServerValue.increment(1),
-                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(1),
+                        ["game-win"]: firebase.database.ServerValue.increment(-1),
+                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(-1),
                     })
                     console.log("X win");
                 }
                 if (snapshot.child("player").child("player-o-email").val() == currentUser.email) {
                     recordRef.child(currentUser.uid).update({
-                        ["game-lose"]: firebase.database.ServerValue.increment(1),
-                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(1),
+                        ["game-lose"]: firebase.database.ServerValue.increment(-1),
+                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(-1),
                     })
                     console.log("O Lose");
                 }
@@ -344,15 +344,15 @@ function addWinLose(winner) {
             if (winner == "O") {
                 if (snapshot.child("player").child("player-x-email").val() == currentUser.email) {
                     recordRef.child(currentUser.uid).update({
-                        ["game-lose"]: firebase.database.ServerValue.increment(1),
-                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(1),
+                        ["game-lose"]: firebase.database.ServerValue.increment(-1),
+                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(-1),
                     })
                     console.log("X lose");
                 }
                 if (snapshot.child("player").child("player-o-email").val() == currentUser.email) {
                     recordRef.child(currentUser.uid).update({
-                        ["game-win"]: firebase.database.ServerValue.increment(1),
-                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(1),
+                        ["game-win"]: firebase.database.ServerValue.increment(-1),
+                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(-1),
                     })
                     console.log("O win");
                 }
@@ -360,12 +360,12 @@ function addWinLose(winner) {
             if (winner == "Non") {
                 if (snapshot.child("player").child("player-x-email").val() == currentUser.email) {
                     recordRef.child(currentUser.uid).update({
-                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(1),
+                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(-1),
                     })
                 }
                 if (snapshot.child("player").child("player-o-email").val() == currentUser.email) {
                     recordRef.child(currentUser.uid).update({
-                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(1),
+                        ["Totalmatchplay"]: firebase.database.ServerValue.increment(-1),
                     })
                 }
             }

@@ -23,8 +23,8 @@ const currentUser = firebase.auth().currentUser;
             } else{
                 totalMatch = 0
             }
-            document.querySelector("#TotalMatchPlay").innerText = totalMatch
-            document.querySelector("#TotalMatchPlays").innerText = totalMatch
+            document.querySelector("#TotalMatchPlay").innerText = Math.abs(totalMatch)
+            document.querySelector("#TotalMatchPlays").innerText = Math.abs(totalMatch)
         })
         recordRef.child(currentUser.uid).child("game-win").once("value").then((userData) => {
             if (userData.val()) {
@@ -32,8 +32,8 @@ const currentUser = firebase.auth().currentUser;
             } else{
                 gameWin = 0
             }
-            document.querySelector("#MatchWon").innerText = gameWin
-            document.querySelector("#MatchWons").innerText = gameWin
+            document.querySelector("#MatchWon").innerText = Math.abs(gameWin)
+            document.querySelector("#MatchWons").innerText = Math.abs(gameWin)
         })
         recordRef.child(currentUser.uid).child("game-lose").once("value").then((userData) => {
             if (userData.val()) {
@@ -41,10 +41,10 @@ const currentUser = firebase.auth().currentUser;
             } else{
                 gameLost = 0
             }
-            document.querySelector("#MatchLost").innerText = gameLost
-            document.querySelector("#MatchLosts").innerText = gameLost
-            document.querySelector("#WinRate").innerText = (parseFloat(document.querySelector("#MatchWon").innerText) / parseFloat(document.querySelector("#TotalMatchPlay").innerText)).toFixed(2) 
-            document.querySelector("#WinRates").innerText = (parseFloat(document.querySelector("#MatchWons").innerText) / parseFloat(document.querySelector("#TotalMatchPlays").innerText)).toFixed(2) 
+            document.querySelector("#MatchLost").innerText = Math.abs(gameLost)
+            document.querySelector("#MatchLosts").innerText = Math.abs(gameLost)
+            document.querySelector("#WinRate").innerText = Math.abs((parseFloat(document.querySelector("#MatchWon").innerText)) / Math.abs(parseFloat(document.querySelector("#TotalMatchPlay").innerText))).toFixed(2)
+            document.querySelector("#WinRates").innerText = Math.abs((parseFloat(document.querySelector("#MatchWons").innerText)) / Math.abs(parseFloat(document.querySelector("#TotalMatchPlays").innerText))).toFixed(2)
         })
         document.querySelector("#WinRate").innerText = document.querySelector("#MatchWon").innerText + document.querySelector("#MatchLost").innerText
         console.log("User :", user);
@@ -52,7 +52,7 @@ const currentUser = firebase.auth().currentUser;
         document.querySelector("#dashboardName").innerText = user.email
         document.querySelector("#dashboardNameSmall").innerText = user.email
         dashboardNameSmall
-        
+
     } else {
         console.log("Unavailable user from dash");
         window.location.href = "index.html"
